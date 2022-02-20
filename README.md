@@ -1,5 +1,6 @@
 # SQL STUDY
-pdf文件存放导出的pdf文件格式文档，md文件则是使用markdown格式书写的文档。
+
+pdf文件格式文档暂时不上传了，目前只上传md文件。
 
 **学习成长之路**，持续更新优化中，未完待续...
 
@@ -7,15 +8,6 @@ pdf文件存放导出的pdf文件格式文档，md文件则是使用markdown格�
 
 仓库目录结构说明：**已经存放markdown格式和PDF格式的文章全部做了超链接**。
 
-- [pdf文件目录](https://github.com/cnwangk/SQL-study/tree/master/pdf)：整理的PDF文件文章。进行了分类，数据库方面知识存在SQL目录中。
-  - [软件实施](https://github.com/cnwangk/SQL-study/tree/master/pdf/%E8%BD%AF%E4%BB%B6%E5%AE%9E%E6%96%BD%E7%B3%BB%E5%88%97)：软件实施面试题
-  - [nginx](https://github.com/cnwangk/SQL-study/tree/master/pdf/nginx)：nginx入门到实践，反向代理与负载均衡
-  - [SQL](https://github.com/cnwangk/SQL-study/tree/master/pdf/SQL)：存放MySQL以及Oracle数据库实战总结、redis入门指南详细教程
-  - [markdown](https://github.com/cnwangk/SQL-study/tree/master/pdf/markdown)：markdown工具VScode与Typora、图床工具PicGo
-  - [git](https://github.com/cnwangk/SQL-study/tree/master/pdf/git)
-    - git入门教程，配合github与gitee实战演练搭建个人博客网站
-    - git文件与索引管理
-  - [program_live](https://github.com/cnwangk/SQL-study/tree/master/pdf/program_live)：程序人生，个人读书总结
 
 - [md文件目录](https://github.com/cnwangk/SQL-study/tree/master/md)
   - [linux](https://github.com/cnwangk/SQL-study/tree/master/md/linux)：个人的一些Linux相关工作经验总结。
