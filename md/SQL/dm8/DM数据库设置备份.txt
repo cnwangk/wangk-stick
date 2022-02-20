@@ -1,0 +1,50 @@
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++				by 龙腾万里sky 原创不易，白嫖有瘾。						+++	
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+以备份数据库为讲解，做的是全量备份。增量备份新建作业步骤是一样的。
+定期清除备份一样设置，需要手动编写SQL脚本命令。
+
+01、右键代理创建代理环境
+
+02、创建代理后生成作业功能
+
+03、新建作业
+
+04、新建作业设置备份
+
+05、作业步骤
+
+06、作业调度
+
+07、DDL备份语句（每周天23:09:32做一次全量备份）
+全量备份
+call SP_CREATE_JOB('full_bak',1,0,'',0,0,'',0,'全量备份');
+
+call SP_JOB_CONFIG_START('full_bak');
+
+call SP_ADD_JOB_STEP('full_bak', 'ull_bak', 5, '01000D:\software\dmdbms\data\DAMENG\bak', 1, 2, 0, 0, NULL, 0);
+
+call SP_ADD_JOB_SCHEDULE('full_bak', 'full_bak', 1, 2, 1, 1, 0, '23:09:32', NULL, '2021-07-12 23:09:32', NULL, '');
+
+call SP_JOB_CONFIG_COMMIT('full_bak');
+
+
+增量备份
+除周六外，每晚23:30做增量备份
+call SP_CREATE_JOB('increment _bak',1,0,'',0,0,'',0,'increment _bak');
+call SP_JOB_CONFIG_START('increment _bak');
+call SP_ADD_JOB_STEP('increment _bak', 'increment _bak', 6, '11000000D:\software\dmdbms\data\DAMENG\bak', 1, 2, 0, 0, NULL, 0);
+--call SP_ADD_JOB_STEP('increment _bak', 'increment _bak', 6, '11000000D:\software\dmdbms\data\DAMENG\bak', 1, 2, 0, 0, NULL, 0);
+call SP_ADD_JOB_SCHEDULE('increment _bak', 'increment _bak', 1, 2, 1, 63, 0, '23:33:00', NULL, '2021-06-25 22:03:58', NULL, '');
+call SP_JOB_CONFIG_COMMIT('increment _bak');
+
+
+定期清除备份
+每天00:00删除7天前的数据
+call SP_CREATE_JOB('JOB_DEL_BAK_TIMELY',1,0,'',0,0,'',0,'JOB_DEL_BAK_TIMELY');
+call SP_JOB_CONFIG_START('JOB_DEL_BAK_TIMELY');
+call SP_ADD_JOB_STEP('JOB_DEL_BAK_TIMELY', 'JOB_DEL_BAK_TIMELY', 0, 'call SF_BAKSET_BACKUP_DIR_ADD(''DISK'', ''D:\software\dmdbms\data\DAMENG\bak'');
+CALL SP_DB_BAKSET_REMOVE_BATCH(''DISK'', NOW()-7);', 1, 2, 0, 0, NULL, 0);
+call SP_ADD_JOB_SCHEDULE('JOB_DEL_BAK_TIMELY', 'JOB_DEL_BAK_TIMELY', 1, 1, 1, 0, 0, '00:00:00', NULL, '2021-06-25 22:06:13', NULL, '');
+call SP_JOB_CONFIG_COMMIT('JOB_DEL_BAK_TIMELY');
