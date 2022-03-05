@@ -1,9 +1,10 @@
-MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时安装共存的方法，以及Linux发行版Redhat7系列安装的详细教程。
+﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。
 
 本文已收录至github仓库，有个人的Linux以及Windows方面的经验总结，持续更新中：
 
-> https://github.com/cnwangk/SQL-study
+> [https://github.com/cnwangk/SQL-study](https://github.com/cnwangk/SQL-study)
 
+[toc]
 
 # 前言
 
@@ -13,7 +14,7 @@ MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同
 
 **建议初学者多在命令行窗口下进行练习**，熟能生巧。达到一定的熟练程度，再借助客户端工具提高我们的工作效率。最终目的是啥？活下去呗，提高捞金能力。当然开个玩笑，回到正题，接着往下看。
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E5%88%9D%E5%AD%A6%E8%80%85%E4%BD%BF%E7%94%A8mysql8.0%E7%9A%84%E5%91%BD%E4%BB%A4%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8C%87%E5%8D%97_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/7b6a3c1312093fba007e4f7fb6bf909d.png)
 
 从下载到安装，再到忘记密码解决方案。一步步使用命令行窗口学会基本操作，然后使用客户端远程连接工具。最后配合时下比较火热的Java语言进行演示如何使用JDBC连接最新的MySQL8.0数据库，以及执行查询返回结果。
 
@@ -33,19 +34,19 @@ MySQL官网下载地址
 
 在Windows下可以选择下载msi文件或者解压版zip文件。**一般使用，选择我使用紫色框线选中的即可**。关于下面的Debug Test Suite，是带有许多的测试套件在里面，对于有测试需求的人员可以进行下载。
 
-![](https://gitee.com/dywangk/img/raw/master/images/MySQL8.0.28%E4%B9%8BWindows%E7%89%88%E6%9C%AC_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/145d1bcbb825cfacdce0699228e89ee6.png)
 
 ### 2、Linux版本下载
 
 根据自己需要的Linux发行版版本适配的MySQL进行选择。比如，我个人选择的是自己比较熟悉的Redhat7系列进行下载。同样有bundle版本，包含了一些插件和依赖在里面，便于使用rpm包安装。安装单个的server服务，需要安装其它的依赖包比较繁琐。对于初学者，**建议直接下载RPM bundle版本**。我偏不，就要折腾。那也行，请接着往下看，一样提供了详细安装步骤。
 
-![](https://gitee.com/dywangk/img/raw/master/images/MySQL8.0.28%E4%B9%8BLinux%E5%8F%91%E8%A1%8C%E7%89%88_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/bece1b1fe0b0d6895786b5f4cee4330a.png)
 
 ### 3、注意事项
 
 一般人可以能没仔细看，官方会提示登录，加了button按钮字体非常显眼，而下面的的我需要立即下载则字体很小。所以注意了，选择下面的No thanks，我需要立即下载。选择的是社区版本，免费提供下载。
 
-![](https://gitee.com/dywangk/img/raw/master/images/MySQL%E4%B8%8B%E8%BD%BD%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/5d94094f47a22cfeb07461833128cc84.png)
 
 ## 二、MySQL8.0安装
 
@@ -53,7 +54,7 @@ MySQL官网下载地址
 
 一般情况，默认安装一个MySQL版本服务实例。也不排除预算有限，在同台服务器上安装多个实例进行测试。默认端口3306，如果在发布（生产）环境建议修改默认端口，达到不让别人一下就猜到的目的。接下来安装测试多个MySQL服务版本共存一个操作系统下，只针对于Windows下安装多个服务（没有使用虚拟机工具，真机环境下测试）。Linux下有便捷的yum源以及apt方式安装，一键安装所需依赖，但也有比较繁琐的rpm包安装。
 
-### 1、Windows下安装
+### 1、Windows下安装MySQL8.0（zip包）
 
 配置环境变量，编辑系统环境变量，控制面板>所有控制面板项>系统>高级系统配置>**系统环境变量**：
 
@@ -64,7 +65,7 @@ MySQL_HOME
 D:\work\mysql-8.0.28-winx64\bin
 ```
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/0221df1158d595cbac665375fe3876d7.png)
 
 msi文件安装就不介绍了，傻瓜式的一键安装，**注意选择路径**。
 
@@ -100,6 +101,7 @@ default-storage-engine=INNODB
 
 **1.2、实例化**
 
+
 **得到反馈说执行-initialize-insecure'mysqld' 不是内部或外部命令，也不是可运行的程序或批处理文件**。
 
 解决方法：`cd D:\work\mysql-8.0.28-winx64\bin`，切换至上述目录执行。
@@ -128,7 +130,7 @@ mysqld --verbose --help
 ```bash
 # 1、第一步切换到D盘
 d:
-# 2、第二步执行cd命令，切换到个人安装mysql的bin目录下
+# 2、第二步切换到个人安装mysql的bin目录下
 cd D:\work\mysql-8.0.28-winx64\bin
 ```
 
@@ -218,7 +220,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码'
 
 之所以在Windows下介绍的如此详细，是因为我们平时的工作环境更多的是在Windows下进行的。就算使用Linux环境一般也是使用虚拟机配合Linux发行版，再就是云服务器了。MySQL的一些命令都熟悉了，Linux下安装还能难倒你吗？直接翻一翻官方文档即可。
 
-### 2、Linux下安装
+### 2、Linux下安装MySQL8.0
 
 建议初学者不要像我这样去安装rpm包，**你可以直接下载rpm bundle，或者使用mysql官方的yum源**。个人有多年Linux使用经验，以及有一定的实际工作经验；知道如何判断哪些包是必须的，以及哪些需要被替换掉。
 
@@ -232,7 +234,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码'
 
 系统会提示哪些是需要的依赖包，所以我事先**准备需要的依赖包**。
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E5%87%86%E5%A4%87%E4%BE%9D%E8%B5%96%E5%8C%85.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/f5efd6339146365a68979ab1f6f95890.png)
 
 ```bash
 [mysql@localhost ~]$ rpm -ivh mysql-community-server-8.0.28-1.el7.x86_64.rpm 
@@ -264,7 +266,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码'
 
 **2.2.1、安装依赖包**，然后使用`rpm -qa | grep mysql`查询哪些被安装了。怎么传到服务器上，简单一点scp命令即可。
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E5%88%A9%E7%94%A8GitBash%E5%B0%86rpm%E5%8C%85%E4%BC%A0%E8%BE%93%E5%88%B0%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%90%AD%E5%BB%BA%E7%9A%84%E7%8E%AF%E5%A2%83_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/7863370c5f41c7f75b8772df486cef2b.png)
 
 **安装rpm包的步骤方法一**，严格按照我所写的顺序来，非root用户使用sudo提权：
 
@@ -289,8 +291,6 @@ $ cd /opt/soft/mysql
 $ sudo yum -y install mysql-community*
 ```
 
-
-
 **2.2.2、Redhat7系列需要卸载原有的mariadb-libs**，替换为mysql-community-libs依赖
 
 卸载掉原有的mariadb-libs依赖包，毕竟是担心被Oracle收购的MySQL有闭源风险，所以默认依赖包都被换成MariaDB了。
@@ -300,8 +300,6 @@ $ yum remove mariadb-libs
 ```
 
 **2.2.3、正式安装server**
-
-这一步是进行说明，多次执行只会提示已经安装过该rpm包。
 
 ```bash
 $ rpm -ivh mysql-community-server-8.0.28-1.el7.x86_64.rpm
@@ -316,7 +314,7 @@ mysqladmin  Ver 8.0.28 for Linux on x86_64 (MySQL Community Server - GPL)
 
 2.2.4、**赋予mysql安装目录所有者为mysql用户**，rpm包默认安装后的路径在/var/lib/mysql。在授予mysql用户所有者和所属组权限之后，你可以使用mysql用户进行登录或者启动服务与关闭服务。
 
-![](https://gitee.com/dywangk/img/raw/master/images/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8%E6%96%B0%E5%BB%BA%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95mysql_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/d0b4fad21e653bccff67d365e059171c.png)
 
 ```bash
 #添加mysql组
@@ -335,28 +333,25 @@ tips：你也可以将mysql用户加入到/etc/sudoers配置文件中，限制my
 
 **2.3、初始化**
 
-每个人的安装环境有所差异。可以参考官方文档，关于初始化数据库有详细的说明：
-
+每个人的安装环境有所差异。可以参考官方文档，关于初始化有详细的说明：
 > [https://dev.mysql.com/doc/refman/8.0/en/data-directory-initialization.html](https://dev.mysql.com/doc/refman/8.0/en/data-directory-initialization.html)
 
-设置密码为空，后续登录可修改密码。
+设置密码为空，后续登录可修改密码
 
 ```bash
 $ mysqld --initialize-insecure
 ```
 
-在进行到这一步的时候，咱可以去日志验证，能看到提示是初始化完成的。并且友好的提示，已经给你初始化完成啦，温馨提示这是创建了一个超级用户密码是空的。
+在进行到这一步的时候，咱可以去日志验证，能看到提示是初始化完成的。并且友好的提示，已经给你初始化完成啦，温馨提示创建了一个超级用户密码是空的。
 
 ```bash
 $ cat /var/log/mysqld.log
 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
 ```
 
-
-
 **2.4、启动服务与查看服务状态**
 
-![](https://gitee.com/dywangk/img/raw/master/images/Linux%E4%B8%8B%E5%90%AF%E5%8A%A8%E4%B8%8E%E6%9F%A5%E7%9C%8Bmysqld%E6%9C%8D%E5%8A%A1_proc50.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/2ade9aa53c59a31748d9d32497b5c788.png)
 
 **Redhat7系列使用命令启动MySQL服务**
 
@@ -370,7 +365,7 @@ $ systemctl start mysqld
 $ systemctl enable mysqld
 ```
 
-临时关闭服务
+关闭服务
 
 ```bash
 $ systemctl stop mysqld
@@ -387,7 +382,6 @@ $ systemctl restart mysqld
 ```bash
 $ mysql -uroot -p
 ```
-
 **关于启动mysqld服务出现权限不足的问题，在mysql和Oracle官方都不提倡使用root用户来管理**。
 
 ```bash
@@ -415,7 +409,6 @@ $ mysql -uroot -p
 [root@mysql ~]# systemctl status mysqld
 [root@mysql ~]# mysql -uroot -p
 ```
-
 **2.5、设置防火墙**
 
 加入mysql服务以及需要的端口3306
@@ -443,7 +436,7 @@ mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY 'Mysql@123
 mysql> flush privileges; -- 第四步刷新权限
 ```
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E7%99%BB%E5%BD%95%E4%B8%8ALinux%E4%B8%8B%E7%9A%84mysql8_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/a864949f65776e7f9d9d98fbe1fcdfa7.png)
 
 ### 3、关于忘记密码解决方案
 
@@ -545,22 +538,102 @@ $ mysql -u root -p
 
 
 
+### 4、Windows下安装MySQL8.0（MSI文件）
+
+**作为补充说明**：详细安装不做截图，只写注意事项。
+
+1. MSI文件安装注意事项；
+2. 多个MySQL服务共存如何解决冲突。
+
+**注意选安装路径，Advanced Options**，这行字很小，返回上一层时很有可能没注意。
+
+![](https://gitee.com/dywangk/img/raw/master/images/msi%E6%96%87%E4%BB%B6%E5%AE%89%E8%A3%85%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9_proc.jpg)
+
+
+
+**注意：选择安装路径有空格，可能会产生影响，最好去掉。默认安装路径在C盘，我这里改为自己的管理路径**。
+
+方法有多种，这里采取先卸载服务，然后安装服务，最后修改注册表指定mysqld和my.ini路径。
+
+1. **以管理员身份运行CMD命令**
+
+2. 执行命令进入D盘
+
+   ```bash
+   d:
+   ```
+
+3. 进入MySQL服务的bin目录
+
+   ```bash
+   cd D:\software\MySQL\MySQLServer8.0\bin\
+   ```
+
+4. 卸载原有MySQL80服务
+
+   ```bash
+   mysqld remove MySQL80
+   ```
+
+5. 重新安装MySQL服务，注意服务名不要重复
+
+   ```bash
+   mysqld install MySQL
+   ```
+
+6. 进入注册表
+   快捷键：win + r，然后输入regedit进入注册表。
+
+7. 修改注册表对应路径和默认my.ini路径（可能需要重启）
+   注册表路径：计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\MySQL
+
+   ![](https://gitee.com/dywangk/img/raw/master/images/msi%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%B7%AF%E5%BE%84_proc.jpg)
+
+   修改imagePath值，**注意改成你自己安装路径**：
+
+   ```bash
+   "D:\software\MySQL\MySQLServer8.0\bin\mysqld.exe" --defaults-file="D:\software\MySQL\data\MySQLServer8.0\my.ini" MySQL
+   ```
+
+8. 登录时，选择端口（基于多个服务实例共存），-P大写P后面接在my.ini配置文件中指定的端口。
+
+   ```bash
+   mysql -uroot -p -P 3366
+   ```
+
+**仅供参考**，虽然个人在win10环境得以解决，但不一定适用你的系统环境。
+
+
+
 ## 三、MySQL8.0使用
 
-主要基于Windows10进行说明的，一些命令同样适用于Linux。
+**仅供测试学习参考**，具体应以实际工作场景为主。
+
+主要基于Windows10进行说明，一个MariaDB服务与两个MySQL8.0服务共存。
+
+使用`netstat`命令进行查找Windows下启动的MySQL服务：
+
+```bash
+netstat -ano | findstr 3306
+```
+
+![](https://gitee.com/dywangk/img/raw/master/images/%E5%90%AF%E5%8A%A8%E4%B8%89%E5%8F%B0mysql%E6%9C%8D%E5%8A%A1_proc.jpg)
 
 ### 1、Windows多个MySQL服务实例共存
 
 注意修改注册表路径，解决启动MySQL服务意外停止的情况，提示1067还是1068来着。
 
+**执行CMD命令时以管理员身份运行**，普通身份运行会提示拒绝访问。
+
 ```bash
+net start mysql80
 net start mysql8
 net start mysql
 ```
 
 为了测试演示最新版本，我将服务名改成了MySQL8。
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E4%BF%AE%E6%94%B9MySQL%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%B7%AF%E5%BE%84_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/304d7ccb9ec12b85d829e68dd9e5abab.png)
 
 ```bash
 # 安装服务指定了服务名为MySQL8
@@ -571,7 +644,7 @@ net start mysql
 
 我之前安装的MariaDB10.5.6。我想继续使用MariaDB，又想体验最新版的MySQL8.0.28，选择这样处理。
 
-![](https://gitee.com/dywangk/img/raw/master/images/MariaDB%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%B7%AF%E5%BE%84_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/c46b6e7f3923ff4dafa9385671e7c028.png)
 
 **1.1、登录并指定端口**3307，默认为3306，我的MariaDB已经占用了3306端口。**个人测试演示多个实例共存改了端口为3307**。
 
@@ -596,7 +669,7 @@ mysql> select version();
 ```
 ````
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E5%88%9D%E5%AD%A6%E8%80%85%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8C%87%E5%8D%97%E7%99%BB%E5%BD%95%E4%B8%8E%E6%9F%A5%E7%9C%8B%E7%89%88%E6%9C%AC_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/842e5e9623b5a5156bdbaf67b9b1f6aa.png)
 
 总结一下：
 
@@ -609,7 +682,7 @@ mysql> select version();
 
 
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E5%88%9D%E5%AD%A6%E8%80%85%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/01d10238ecaa7e9ebdd0e879e67b9cc6.png)
 
 ### 2、权限设置
 
@@ -753,7 +826,7 @@ mysql> flush privileges;
 
 **在第三方工具中验证登录结果，在localhost下可以登录成功**：
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E6%8E%88%E6%9D%83test%E7%94%A8%E6%88%B7%E5%8F%AA%E6%9C%89select%E6%9D%83%E9%99%90%E5%85%81%E8%AE%B8%E6%9C%AC%E5%9C%B0%E7%99%BB%E5%BD%95_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/4a40423397751d94b0dcf4a3a797867f.png)
 
 目前只给了查询（select）权限，**验证插入（insert）权限**：
 
@@ -764,7 +837,7 @@ ERROR 1142 (42000): INSERT command denied to user 'test'@'localhost' for table '
 
 这是在SQLyog工具下进行验证的，**建议初学者多在命令行窗口下进行练习**，熟能生巧。
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E9%AA%8C%E8%AF%81%E6%8E%88%E4%BA%88%E6%9D%83%E9%99%90%E7%9A%84%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7test_proc80.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/dd443b23a84d93f6242ba34fef8d13e3.png)
 
 
 
@@ -829,10 +902,10 @@ mysql -uroot -p -P 3307
 mysql -uroot -p
 ```
 
-使用帮助命令，以? create contents形式查找系统帮助命令。
+使用帮助命令，以? contents形式查找系统帮助命令。
 
 ```sql
-? create contents;
+? contents;
 ? create user;
 ? create database;
 ? create table;
@@ -936,7 +1009,7 @@ DELETE FROM STUDY;
 
 给出一个使用Navicat逆向生成的示例数据库world的模型：
 
-![](https://gitee.com/dywangk/img/raw/master/images/world%E7%89%A9%E7%90%86%E6%A8%A1%E5%9E%8B_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/b6f200329156980332d066701583b654.png)
 
 **如果真的要使用到建物理模型**：推荐你学习Sybase PowerDesigner设计工具的使用，而且需要了解关系数据库设计遵循的三范式。现在数据库设计最多满足3NF，普遍认为范式过高，虽然具有对数据关系更好的约束性，但也导致数据关系表增加而令数据库IO更易繁忙，原来交由数据库处理的关系约束现更多在数据库使用程序中完成。
 
@@ -1086,11 +1159,11 @@ public class TestConnMySQL8 {
 
 **在sts编辑工具连接并返回测试结果**
 
-![](https://gitee.com/dywangk/img/raw/master/images/sts%E7%BC%96%E8%AF%91%E5%99%A8%E5%B7%A5%E5%85%B7%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/984339518b7a6600ac764f335d4f02a5.png)
 
 # 总结
 
-以上就是本次MySQL8.0.28安装与使用的全部内容，希望能对你的工作与学习有所帮助。感觉写的好，就拿出你的一键三连。在公众号上更新的可能要快一点，目前还在完善中。**能看到这里的，都是帅哥靓妹**。如果感觉总结的不到位，也希望能留下您宝贵的意见，我会在文章中进行调整优化。![](https://gitee.com/dywangk/img/raw/master/images/Snipaste_2022-01-25_20-24-05.jpg)
+以上就是本次MySQL8.0.28安装与使用的全部内容，希望能对你的工作与学习有所帮助。感觉写的好，就拿出你的一键三连。在公众号上更新的可能要快一点，目前还在完善中。**能看到这里的，都是帅哥靓妹**。如果感觉总结的不到位，也希望能留下您宝贵的意见，我会在文章中进行调整优化。![](https://img-blog.csdnimg.cn/img_convert/9274af9e14216005237b8c9698286908.png)
 
 原创不易，转载也请标明出处和作者，尊重原创。不定期上传到github或者gitee。认准龙腾万里sky，如果看见其它平台不是这个ID发出我的文章，就是转载的。**MySQL系列文章**：《**MySQL开发篇，存储引擎的选择真的很重要吗？**》已经上传至github和gitee仓库SQL-study。个人github仓库地址，一般会先更新PDF文件，然后再上传markdown文件。如果访问github太慢，可以使用gitee进行克隆。
 
