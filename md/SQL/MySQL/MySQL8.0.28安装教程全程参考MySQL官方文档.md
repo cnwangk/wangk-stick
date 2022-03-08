@@ -1,4 +1,4 @@
-﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。
+﻿﻿﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。
 
 本文已收录至github仓库，有个人的Linux以及Windows方面的经验总结，持续更新中：
 
@@ -142,12 +142,31 @@ D:\work\mysql-8.0.28-winx64\bin> mysqld --initialize-insecure
 
 **1.3、安装服务**
 
+在Powershell中将帮助文档输出到指定文件mysql_win_help_docs.txt：
+```bash
+mysqld --verbose --help > d:\work\mysql_win_help_docs.txt
+```
+**参考官方文档**
+> Usage: mysqld.exe [OPTIONS]
+NT and Win32 specific options:
+  --install                     Install the default service (NT).
+  --install-manual              Install the default service started manually (NT).
+  --install service_name        Install an optional service (NT).
+  --install-manual service_name Install an optional service started manually (NT).
+  --remove                      Remove the default service from the service list (NT).
+  --remove service_name         Remove the service_name from the service list (NT).
+  --enable-named-pipe           Only to be used for the default server (NT).
+  --standalone                  Dummy option to start as a standalone server (NT).
+
+
 进入到解压后MySQL的bin目录下，执行安装服务命令：
 
 ```bash
 cd D:\work\mysql-8.0.28-winx64\bin
+#默认不加服务名，则为MySQL
 mysqld install
-mysqld install --service -mysql8
+#可以指定服务名MySQL8,只作为参考
+mysqld install MySQL8
 ```
 
 如果没有安装多个服务，**使用mysqld install即可**。可以不用指定服务名，默认的服务名为MySQL。
@@ -438,7 +457,7 @@ mysql> flush privileges; -- 第四步刷新权限
 
 ![](https://img-blog.csdnimg.cn/img_convert/a864949f65776e7f9d9d98fbe1fcdfa7.png)
 
-### 3、关于忘记密码解决方案
+### 3、忘记root用户密码解决方案
 
 很多小伙伴估计都遇到过设置密码后，结果忘记密码了。本文的解决方案，完全适用目前最新版本MySQL8.0.28，**亲自测试验证过**。
 
@@ -1161,11 +1180,20 @@ public class TestConnMySQL8 {
 
 ![](https://img-blog.csdnimg.cn/img_convert/984339518b7a6600ac764f335d4f02a5.png)
 
+**参考文献**：
+
+- MySQL8.0官方文档；
+- mysql自带帮助文档：mysqld --verbose --help
+
+
+
 # 总结
 
-以上就是本次MySQL8.0.28安装与使用的全部内容，希望能对你的工作与学习有所帮助。感觉写的好，就拿出你的一键三连。在公众号上更新的可能要快一点，目前还在完善中。**能看到这里的，都是帅哥靓妹**。如果感觉总结的不到位，也希望能留下您宝贵的意见，我会在文章中进行调整优化。![](https://img-blog.csdnimg.cn/img_convert/9274af9e14216005237b8c9698286908.png)
+以上就是本次MySQL8.0.28安装与使用的全部内容，希望能对你的工作与学习有所帮助。感觉写的好，就拿出你的一键三连。在公众号上更新的可能要快一点，目前还在完善中。**能看到这里的，都是帅哥靓妹**。如果感觉总结的不到位，也希望能留下您宝贵的意见，我会在文章中进行调整优化。
 
-原创不易，转载也请标明出处和作者，尊重原创。不定期上传到github或者gitee。认准龙腾万里sky，如果看见其它平台不是这个ID发出我的文章，就是转载的。**MySQL系列文章**：《**MySQL开发篇，存储引擎的选择真的很重要吗？**》已经上传至github和gitee仓库SQL-study。个人github仓库地址，一般会先更新PDF文件，然后再上传markdown文件。如果访问github太慢，可以使用gitee进行克隆。
+![](https://img-blog.csdnimg.cn/img_convert/9274af9e14216005237b8c9698286908.png)
+
+原创不易，转载也请标明出处和作者，尊重原创。不定期上传到github。**MySQL系列文章**：《**MySQL开发篇，存储引擎的选择真的很重要吗？**》已经上传至github仓库SQL-study。
 
 **tips**：使用hexo搭建的静态博客也会定期更新维护。
 
