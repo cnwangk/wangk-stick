@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。
+﻿﻿﻿﻿﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。
 
 本文已收录至github仓库，有个人的Linux以及Windows方面的经验总结，持续更新中：
 
@@ -989,7 +989,7 @@ CREATE TABLE STUDY(
 3、插入数据
 
 ```sql
-INSERT INTO STUDY VALUES(1,'mysql目前最新版本msyql8.0.28');
+INSERT INTO STUDY VALUES(1,'mysql目前最新版本mysql8.0.28');
 ```
 
 4、查询数据
@@ -1011,6 +1011,49 @@ DELETE FROM STUDY;
 ```
 
 至此基本的创建用户、创建数据库、增删改查都会使用了。
+
+
+
+### 5、MySQL官方文档下载地址
+左侧导航栏有个Download this Manual：MySQL文档下载地址。
+
+以下给出目前比较火热的三个版本下载地址：
+
+
+1. MySQL8.0在线文档
+[https://dev.mysql.com/doc/refman/8.0/en](https://dev.mysql.com/doc/refman/8.0/en)
+
+2. MySQL8.0文档PDF文件下载地址
+[https://downloads.mysql.com/docs/refman-8.0-en.a4.pdf](https://downloads.mysql.com/docs/refman-8.0-en.a4.pdf)
+
+3. MySQL5.7在线文档
+[https://dev.mysql.com/doc/refman/5.7/en/](https://dev.mysql.com/doc/refman/5.7/en/)
+
+4. MySQL5.7文档PDF文件下载地址
+[https://downloads.mysql.com/docs/refman-5.7-en.a4.pdf](https://downloads.mysql.com/docs/refman-5.7-en.a4.pdf)
+
+5. MySQL5.6在线文档
+[https://dev.mysql.com/doc/refman/5.6/en/](https://dev.mysql.com/doc/refman/5.6/en/)
+
+4. MySQL5.6文档PDF文件下载地址
+[https://downloads.mysql.com/docs/refman-5.6-en.a4.pdf](https://downloads.mysql.com/docs/refman-5.6-en.a4.pdf)
+
+### 6、MySQL官方示例库
+给出**sakila-db数据库**包含三个文件，便于大家获取与使用：
+
+1. sakila-schema.sql：数据库表结构；
+2. sakila-data.sql：数据库示例模拟数据；
+3. sakila.mwb：数据库物理模型，在MySQL workbench中可以打开查看。
+
+> [https://downloads.mysql.com/docs/sakila-db.zip](https://downloads.mysql.com/docs/sakila-db.zip)
+
+**world-db数据库**，包含三张表：city、country、countrylanguage。
+
+**只是用于用于简单测试学习，建议使用world-db**：
+
+> [https://downloads.mysql.com/docs/world-db.zip](https://downloads.mysql.com/docs/world-db.zip)
+
+
 
 ## 四、MySQL连接工具
 
