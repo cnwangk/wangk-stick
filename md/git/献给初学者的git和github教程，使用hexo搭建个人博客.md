@@ -1,8 +1,12 @@
+<H5 align=center><a href="https://blog.csdn.net
+
+突然再次逛到hexo，此时回想起N年前还是看别人的教程搭建github和hexo。今天直接在github上看了hexo的简单教程，快速搭建一个示例出来，直接访问可以看到效果呦：[https://cnwangk.github.io/](https://cnwangk.github.io/)
+
+
+
+[toc]
+
 # 前言
-
-首选展示一下闲来无事，突然再次逛到hexo，此时回想起5年前还是是看别人的博客教程搭建。今天直接在github上看了hexo的简单教程，亲自撸了一个很简陋的小破站出来，直接访问可以看到效果呦：[https://cnwangk.github.io/](https://cnwangk.github.io/)
-
-![](https://gitee.com/dywangk/img/raw/master/images/github_pages_hexo_proc.jpg)
 
 hexo配合github还是挺方便的，毕竟在Windows平台我可以利用node.js安装hexo插件，进而配合一键生成模板然后提交到github。直接在hexo生成的blob模板中的markdown文件中写入你的文章。抛开通用性，markdown确实很方便。这里提供一下**hexo的网址**：
 
@@ -42,7 +46,7 @@ hexo配合github还是挺方便的，毕竟在Windows平台我可以利用node.j
 
 git下载地址：支持Linux/Unix、macOS、Windows
 
-![](https://gitee.com/dywangk/img/raw/master/images/git%E4%B8%8B%E8%BD%BD_proc.jpg)
+![](https://gitee.com/dywangk/img/raw/master/images/git下载_proc.jpg)
 
 
 
@@ -56,25 +60,26 @@ you parents must have hated you!
 you sysadmin must hate you! 
 ```
 
-不要慌，此时git在告诉你，我无法确定您的真实姓名，咱交个好朋友吧，请告诉我你的芳名。
-
-通过设置name和email地址可以修复此问题。
+不要慌，此时git在告诉你，我无法确定您的真实姓名，咱交个好朋友吧，请告诉我你的芳名。通过设置name和email地址可以修复此问题。
 
 
 
-2.1、配置提交作者
+**2.1、配置提交作者**
 
 安装好了git工具，此时可以在桌面右键（Git Bash），输入以下命令进行设置用户以及email。
 
 ```bash
-$ git config --global user.name "dywangk"
-$ git config --global user.email "dywangk@example.com"
+$ git config --global user.name "demo"
+$ git config --global user.email "demo@example.com"
 ```
 
-2.2、生成ssh公钥，Windows下默认在**系统盘的当前用的.ssh目录**下
+**2.2、生成ssh公钥**，Windows下默认在**系统盘的当前用的.ssh目录**下，可以配置ed25519或者是rsa方式都行，**github官网的教程推荐的是rsa方式**。
 
 ```bash
-$ ssh -keygen -t ed25519 -C "test@example.com" 
+#方式一
+$ ssh-keygen -t ed25519 -C "demo@example.com" 
+#方式二
+$ ssh-keygen -t rsa -b 4096 -C "demo@example.com"
 ```
 
 2.3、**gitee提供的方案配置多个key**
@@ -82,8 +87,8 @@ $ ssh -keygen -t ed25519 -C "test@example.com"
 生成rsa文件时，以指定不同的文件命令作为区分gitee以及github生成的key文件。
 
 ```bash
-$ ssh-keygen -t rsa -C 'dywangk@company.com' -f ~/.ssh/gitee_id_rsa
-$ ssh-keygen -t rsa -C 'dywangk@163.com' -f ~/.ssh/github_id_rsa
+$ ssh-keygen -t rsa -b 4096 -C 'demo@company.com' -f ~/.ssh/gitee_id_rsa
+$ ssh-keygen -t rsa -b 4096 -C 'demo@163.com' -f ~/.ssh/github_id_rsa
 ```
 
 生成key后，然后在 ~/.ssh 目录下新建一个config文件，添加如下内容（其中Host和HostName填写git服务器的域名，IdentityFile指定私钥的路径）。看完后我大致明白了，是将gitee和github区分开来，分别读取不同的id_rsa文件的参数值。
@@ -112,13 +117,15 @@ $ ssh -T git@github.com
 
 
 
-配置好git之后，利用ssh -keygen命令生成ssh公钥，生成公钥所在的存储目录（以Windows环境为例）。生成完key后，可以通过VSCode、sublime text或者其她的辅助工具打开这个文件，复制到github的ssh公钥并保存。在下面的github介绍过程中，我有提到如何将生成的key保存到github并验证。同理gitee也是一样的操作过程，只是操作界面不一样而已。
+配置好git之后，利用ssh -keygen命令生成ssh公钥，生成公钥所在的存储目录（以Windows环境为例）。生成完key后，可以通过VSCode、sublime text或者其她的辅助工具打开这个文件，复制到github的ssh公钥并保存。在下面的github介绍过程中，我有提到如何将生成的key保存到github并验证。同理gitee也是一样的操作过程，只是操作界面不一样而已。注意ssh-keygen之间没有空格，个人使用习惯打了个空格出来。
 
 ![](https://gitee.com/dywangk/img/raw/master/images/git%E7%94%9F%E6%88%90%E7%9A%84id_rsa%E5%AD%98%E5%82%A8%E7%9D%80ssh%E5%85%AC%E9%92%A5_proc.jpg)
 
+### 3、github加速访问
 
+**下载油猴管理脚本**，加入你需要的js脚本加速访问github：
 
-
+> [https://www.tampermonkey.net/](https://www.tampermonkey.net/)
 
 ## 二、gitee
 
@@ -176,7 +183,7 @@ gitee官网有很详细的中文说明文档，至于如何配置，我这里给
 
 这里不仅仅是支持配置SSH keys，并且还支持配置GPG keys，需要下载支持的工具进行生成GPG公钥然后添加到github。当然，如果你要移除某一个key，点击Delete删除即可。
 
-![](https://gitee.com/dywangk/img/raw/master/images/github%E9%85%8D%E7%BD%AEsshkeys_gpgkeys_proc.jpg)
+![](https://gitee.com/dywangk/img/raw/master/images/github配置sshkeys_gpgkeys_proc.jpg)
 
 [https://github.com/settings/ssh/new](https://github.com/settings/ssh/new)
 
@@ -186,7 +193,7 @@ gitee官网有很详细的中文说明文档，至于如何配置，我这里给
 
 账号设置，可以修改用户名、以及删除你的账号（谨慎操作）。
 
-![](https://gitee.com/dywangk/img/raw/master/images/github%E8%B4%A6%E5%8F%B7%E8%AE%BE%E7%BD%AE_proc.jpg)
+![](https://gitee.com/dywangk/img/raw/master/images/github账号设置_proc.jpg)
 
 [https://github.com/settings/admin](https://github.com/settings/admin)
 
@@ -206,7 +213,7 @@ gitee官网有很详细的中文说明文档，至于如何配置，我这里给
 
 设置邮箱后，可以使用设置好的邮箱进行登录操作，接收一些比如修改密码时可能需要邮箱验证。
 
-![](https://gitee.com/dywangk/img/raw/master/images/github%E9%82%AE%E7%AE%B1%E8%AE%BE%E7%BD%AE_proc.jpg)
+![](https://gitee.com/dywangk/img/raw/master/images/github邮箱设置_proc.jpg)
 
 [https://github.com/settings/emails](https://github.com/settings/emails)
 
@@ -227,13 +234,13 @@ ssh -T git@github.com
 
 
 
-![](https://gitee.com/dywangk/img/raw/master/images/git%E4%BD%BF%E7%94%A8ssh-T%E6%B5%8B%E8%AF%95%E8%BF%9E%E6%8E%A5.png)
+![](https://gitee.com/dywangk/img/raw/master/images/git使用ssh-T测试连接.png)
 
 
 
 下面是配置好了github的ssh公钥或者是GPG keys，进行测试验证，返回结果是成功。
 
-![](https://gitee.com/dywangk/img/raw/master/images/github%E9%85%8D%E7%BD%AEssh%E5%85%AC%E9%92%A5%E8%AE%BF%E9%97%AE%E9%AA%8C%E8%AF%81.png)
+![](https://gitee.com/dywangk/img/raw/master/images/github配置ssh公钥访问验证.png)
 
 
 
@@ -249,13 +256,14 @@ ssh -T git@github.com
 
 **github一些使用介绍**，你的个人仓库（your repositories）、个人收藏的仓库（your stars）、个人设置（settings）
 
-![](https://gitee.com/dywangk/img/raw/master/images/github%E6%93%8D%E4%BD%9C%E7%AE%80%E4%BB%8B_proc.jpg)
+![](https://gitee.com/dywangk/img/raw/master/images/github操作简介_proc.jpg)
 
 
 ### 5、获取github私人令牌（token）
+
 **登录到github**，在个人设置（点右上角头像）找到**settings**（设置），左侧一栏滑到最下面找到**Developer settings**，然后选中**Personal access tokens**。每张截图下面都有附上设置的地址哟！
 
-![](https://gitee.com/dywangk/img/raw/master/images/github%E7%94%9F%E6%88%90%E4%B8%AA%E4%BA%BAtoken_proc.jpg)
+![](https://gitee.com/dywangk/img/raw/master/images/github生成个人token_proc.jpg)
 
 [https://github.com/settings/tokens](https://github.com/settings/tokens)
 
@@ -277,7 +285,7 @@ git初始化一个仓库时，会生成.git目录，是一个隐藏文件。linu
 
 隐藏目录文件列表如下，具体作用不做讲解。有兴趣的可以去逛逛官方文档，或者参考git相关的实体书。
 
-![](https://gitee.com/dywangk/img/raw/master/images/git%E9%9A%90%E8%97%8F%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6.png)
+![](https://gitee.com/dywangk/img/raw/master/images/git隐藏目录文件.png)
 
 Windows下直接切换到test目录，并**初始化test这个目录**
 
@@ -411,16 +419,19 @@ github pages的配置页面
 
 [https://pages.github.com/](https://pages.github.com/)
 
-**我测试配置了一个仓库**
+**我测试配置了一个仓库**：2022最新版github pages配置界面
 
-**注意**：仓库必须是公开的（public）、然后仓库命令可以命令为用户名加github.io
+**注意**：仓库必须是公开的（public）、然后仓库命令可以命令为用户名加github.io。
 
-![](https://gitee.com/dywangk/img/raw/master/images/github%E9%85%8D%E7%BD%AEpages%E6%9C%8D%E5%8A%A1_proc.jpg)
+默认进入一个设置好的**gh-pages**分支的仓库这样显示内容的：将gh-pages设置为默认仓库。
+
+**Custom domain**：配置域名，比如userName.github.io之外的域名。
+
+![](https://gitee.com/dywangk/img/raw/master/images/搭建github_pages服务_proc.jpg)
+
+
 
 简单的github pages 服务搭建示例，可以测试访问。
 
 [https://cnwangk.github.io/](https://cnwangk.github.io/)
 
-
-
-<H5 align=center><a href="https://blog.csdn.net/Tolove_dream">by 龙腾万里sky  转载请标明出处！</a></H5>
