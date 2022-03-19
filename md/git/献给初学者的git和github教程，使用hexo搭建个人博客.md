@@ -1,11 +1,3 @@
-<H5 align=center><a href="https://blog.csdn.net
-
-突然再次逛到hexo，此时回想起N年前还是看别人的教程搭建github和hexo。今天直接在github上看了hexo的简单教程，快速搭建一个示例出来，直接访问可以看到效果呦：[https://cnwangk.github.io/](https://cnwangk.github.io/)
-
-
-
-[toc]
-
 # 前言
 
 hexo配合github还是挺方便的，毕竟在Windows平台我可以利用node.js安装hexo插件，进而配合一键生成模板然后提交到github。直接在hexo生成的blob模板中的markdown文件中写入你的文章。抛开通用性，markdown确实很方便。这里提供一下**hexo的网址**：
