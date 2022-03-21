@@ -12,7 +12,7 @@
 5. PostgreSQL
 6. SQLite
 
-[toc]
+@[toc]
 
 ## 一	MySQL（MariaDB）官方文档
 
