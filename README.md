@@ -1,12 +1,10 @@
 # SQL STUDY
 
-pdf文件格式文档暂时不上传了，目前只上传md文件。
+> 养得胸中一种恬静，方得始终。
 
-**学习成长之路**，持续更新优化中，未完待续...
+**终身学习，莫问收获，但问耕耘**，持续更新优化中，未完待续...
 
-老夫有一颗少女心，哎呀不小心暴露了我的小九九。正格的，图片可以在wiki中看哟，就不放主目录了。
-
-仓库目录结构说明：**已经存放markdown格式和PDF格式的文章全部做了超链接**。
+目录结构：**已经存放markdown格式的文章全部做了超链接**。
 
 
 - [md文件目录](https://github.com/cnwangk/SQL-study/tree/master/md)
@@ -28,4 +26,9 @@ pdf文件格式文档暂时不上传了，目前只上传md文件。
   - [zabbix](https://github.com/cnwangk/SQL-study/tree/master/md/zabbix)：使用MySQL搭建分布式监控系统。
   - Kafka：准备中。。。
   - RocketMQ：准备中。。。
+  
+  
 
+公众号不断完善中：龙腾万里sky
+
+![](https://gitee.com/dywangk/img/raw/master/images/qrcode_for_gh_d715d501420c_258.jpg)
