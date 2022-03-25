@@ -1,5 +1,11 @@
 # SQL STUDY
 
+
+
+**最近准备更换图床仓库。貌似gitee在针对picGo，外链图片全部挂掉了**。
+
+
+
 > 养得胸中一种恬静，方得始终。
 
 **终身学习，莫问收获，但问耕耘**，持续更新优化中，未完待续...
@@ -31,4 +37,3 @@
 
 公众号不断完善中：龙腾万里sky
 
-![](https://gitee.com/dywangk/img/raw/master/images/qrcode_for_gh_d715d501420c_258.jpg)
