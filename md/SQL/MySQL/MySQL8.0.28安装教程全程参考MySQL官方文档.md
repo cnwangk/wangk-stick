@@ -1,11 +1,11 @@
-﻿﻿﻿﻿﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。
+﻿
+﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。MySQL官方示例库与文档地址已经补充。
 
 本文已收录至github仓库，有个人的Linux以及Windows方面的经验总结，持续更新中：
 
 > [https://github.com/cnwangk/SQL-study](https://github.com/cnwangk/SQL-study)
 
-[toc]
-
+@[toc]
 # 前言
 
 为了MySQL8.0.28安装教程我竟然在MySQL官方文档逛了一天，至此献给想入门MySQL8.0的初学者。以目前最新版本的MySQL8.0.28为示例进行安装与初步使用的详细讲解，面向初学者的详细教程。无论是Windows还是Linux上安装，咱都会。**这也许是迄今为止全网最最最详细的MySQL8.0.28的安装与使用教程**。
@@ -157,7 +157,7 @@ NT and Win32 specific options:
   --remove service_name         Remove the service_name from the service list (NT).
   --enable-named-pipe           Only to be used for the default server (NT).
   --standalone                  Dummy option to start as a standalone server (NT).
-
+  
 
 进入到解压后MySQL的bin目录下，执行安装服务命令：
 
@@ -165,7 +165,7 @@ NT and Win32 specific options:
 cd D:\work\mysql-8.0.28-winx64\bin
 #默认不加服务名，则为MySQL
 mysqld install
-#可以指定服务名MySQL8,只作为参考
+#可以指定服务名
 mysqld install MySQL8
 ```
 
@@ -457,7 +457,7 @@ mysql> flush privileges; -- 第四步刷新权限
 
 ![](https://img-blog.csdnimg.cn/img_convert/a864949f65776e7f9d9d98fbe1fcdfa7.png)
 
-### 3、忘记root用户密码解决方案
+### 3、关于忘记密码解决方案
 
 很多小伙伴估计都遇到过设置密码后，结果忘记密码了。本文的解决方案，完全适用目前最新版本MySQL8.0.28，**亲自测试验证过**。
 
@@ -566,7 +566,7 @@ $ mysql -u root -p
 
 **注意选安装路径，Advanced Options**，这行字很小，返回上一层时很有可能没注意。
 
-![](https://gitee.com/dywangk/img/raw/master/images/msi%E6%96%87%E4%BB%B6%E5%AE%89%E8%A3%85%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/cfa3023aafcd916e2a5470a4010b5d98.png)
 
 
 
@@ -606,7 +606,7 @@ $ mysql -u root -p
 7. 修改注册表对应路径和默认my.ini路径（可能需要重启）
    注册表路径：计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\MySQL
 
-   ![](https://gitee.com/dywangk/img/raw/master/images/msi%E5%AE%89%E8%A3%85%E6%8C%87%E5%AE%9A%E6%B3%A8%E5%86%8C%E8%A1%A8%E8%B7%AF%E5%BE%84_proc.jpg)
+   ![](https://img-blog.csdnimg.cn/img_convert/376cc3230d4291b318d0a77d25183e31.png)
 
    修改imagePath值，**注意改成你自己安装路径**：
 
@@ -636,7 +636,7 @@ $ mysql -u root -p
 netstat -ano | findstr 3306
 ```
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E5%90%AF%E5%8A%A8%E4%B8%89%E5%8F%B0mysql%E6%9C%8D%E5%8A%A1_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/7a5d21bd24df56144dd5766b4e304a31.png)
 
 ### 1、Windows多个MySQL服务实例共存
 
@@ -1013,7 +1013,6 @@ DELETE FROM STUDY;
 至此基本的创建用户、创建数据库、增删改查都会使用了。
 
 
-
 ### 5、MySQL官方文档下载地址
 左侧导航栏有个Download this Manual：MySQL文档下载地址。
 
@@ -1052,7 +1051,6 @@ DELETE FROM STUDY;
 **只是用于用于简单测试学习，建议使用world-db**：
 
 > [https://downloads.mysql.com/docs/world-db.zip](https://downloads.mysql.com/docs/world-db.zip)
-
 
 
 ## 四、MySQL连接工具
@@ -1224,16 +1222,14 @@ public class TestConnMySQL8 {
 ![](https://img-blog.csdnimg.cn/img_convert/984339518b7a6600ac764f335d4f02a5.png)
 
 **参考文献**：
-
-- MySQL8.0官方文档；
-- mysql自带帮助文档：mysqld --verbose --help
+- MySQL8.0官方文档
+- MySQL帮助文档，执行命令即可获取：mysqld --verbose --help
 
 
 
 # 总结
 
 以上就是本次MySQL8.0.28安装与使用的全部内容，希望能对你的工作与学习有所帮助。感觉写的好，就拿出你的一键三连。在公众号上更新的可能要快一点，目前还在完善中。**能看到这里的，都是帅哥靓妹**。如果感觉总结的不到位，也希望能留下您宝贵的意见，我会在文章中进行调整优化。
-
 ![](https://img-blog.csdnimg.cn/img_convert/9274af9e14216005237b8c9698286908.png)
 
 原创不易，转载也请标明出处和作者，尊重原创。不定期上传到github。**MySQL系列文章**：《**MySQL开发篇，存储引擎的选择真的很重要吗？**》已经上传至github仓库SQL-study。
@@ -1241,6 +1237,7 @@ public class TestConnMySQL8 {
 **tips**：使用hexo搭建的静态博客也会定期更新维护。
 
 <H5 align=center><a href="https://github.com/cnwangk/SQL-study">作者：龙腾万里sky</a></H5>
+
 
 
 

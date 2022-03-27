@@ -1,11 +1,10 @@
-Windows中使用hexo搭建个人博客。
+﻿Windows中使用hexo搭建个人博客。
 
 既学了git和github的用法，也熟悉了nodejs。
 
 又多了一项打发业余时间的软技能。慢慢地变成硬技能，何乐而不为？
 
-[toc]
-
+@[toc]
 # Windows中使用hexo搭建私人博客
 
 **必备环境（Windows）**：
@@ -126,7 +125,7 @@ npm install hexo			#使用npm安装Hexo，熟悉的用户可以仅局部安装He
 9. nodejs临时配置国内taobao镜像源：
 
 ​	npm镜像源地址，国内镜像站：
-> [https://npmmirror.com/](https://npmmirror.com/)
+>  [https://npmmirror.com/](https://npmmirror.com/)
 
 ​	nodejs临时配置国内taobao镜像源：
 > npm config set registry http://registry.npm.taobao.org/
@@ -197,9 +196,7 @@ hexo s		#	启动服务
     #theme: landscape
     ```
 
-    
-
-    
+   
 
 12. hexo配置文件
 
@@ -365,7 +362,7 @@ cd yourUserName.github.io		# 3. 切换到仓库
 git branch gh-pages 			# 4. 创建分支gh-pages
 git remote add origin git@github.com:yourUserName/userName.github.io.git # 5. 连接远程仓库，已连接会提示exists
 git add --all					# 6. 暂存所有有文件
-git commit -am "初始化提交"		 # 7. 初始化提交所有文件	
+git commit -am "初始化提交"		# 7. 初始化提交所有文件	
 git push git@github.com:yourUserName/yourUserName.github.io.git # 8. 推送至远程仓库
 ```
 
@@ -383,7 +380,7 @@ git push git@github.com:yourUserName/yourUserName.github.io.git # 8. 推送至�
 
 **Custom domain**：配置域名，比如userName.github.io之外的域名。
 
-![](https://gitee.com/dywangk/img/raw/master/images/搭建github_pages服务_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/5869739fcaf91e45e689fafd53ee9b65.png)
 
 15.访问验证博客
 
@@ -460,19 +457,19 @@ https://hexo.io/zh-cn/docs/										#hexo中文文档
 
 ### 01	首页
 
-![](https://gitee.com/dywangk/img/raw/master/images/hexo_next_blog_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/992e8b5de0023ff946655392f9176e62.png)
 
 ### 02 	标签页
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E6%A0%87%E7%AD%BE%E9%A1%B5_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/7f17c4fe9186828b8239a911d72021bf.png)
 
 ### 03	文章分类
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E6%96%87%E7%AB%A0%E5%88%86%E7%B1%BB_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/df9c83cdc16e7c427653c3ca2a084294.png)
 
 ### 04	本地搜索
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/bde813e135985e959d1828ff40e1c108.png)
 
 # 莫问收获，但问耕耘
 
@@ -485,4 +482,5 @@ https://hexo.io/zh-cn/docs/										#hexo中文文档
 原创不易，转载也请标明出处和作者，尊重原创。不定期上传到github。
 
 **tips**：使用hexo搭建的静态博客也会定期更新维护。
+
 
