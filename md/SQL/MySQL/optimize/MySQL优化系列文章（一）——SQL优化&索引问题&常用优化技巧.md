@@ -1,6 +1,7 @@
-﻿﻿我可以和面试官多聊几句吗？只是想偷点技能过来。MySQL优化篇（基于MySQL8.0测试验证），上部分：优化SQL语句、数据库对象，MyISAM表锁和InnoDB锁问题。
+﻿我可以和面试官多聊几句吗？只是想偷点技能过来。MySQL优化篇（基于MySQL8.0测试验证），上部分：优化SQL语句、数据库对象，MyISAM表锁和InnoDB锁问题。
 
-**MyISAM表锁和InnoDB锁问题会在第二篇发布**：MySQL优化篇，我可以和面试官多聊几句吗？——MyISAM表锁和InnoDB锁问题（二）
+**MyISAM表锁和InnoDB锁问题会在第二篇发布**：MySQL优化篇——MyISAM表锁和InnoDB锁问题。单篇太长，阅读体验确实不佳，CSDN系统都建议分篇发送。目前还在整理中，分篇进行发布。
+
 
 你可以将这片博文，当成过度到MySQL8.0的参考资料。**注意，经验是用来参考，不是拿来即用**。如果你能看到并分享这篇文章，我很荣幸。如果有误导你的地方，我表示抱歉。
 
@@ -20,7 +21,7 @@
 
 > [https://github.com/cnwangk/SQL-study/tree/master/md/SQL/MySQL](https://github.com/cnwangk/SQL-study/tree/master/md/SQL/MySQL)
 
-[toc]
+@[toc]
 # MySQL优化篇（一）
 
 **MyISAM表锁和InnoDB锁问题会在第二篇**：MySQL优化篇（二）进行发布，篇幅太长，不便一次性全部发完。
@@ -303,8 +304,7 @@ possible_keys: NULL
 
 **常见访问类型（type）**：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/ed863b928305408c89b2f40467e7da0e.png#pic_center)
-
+![在这里插入图片描述](https://img-blog.csdnimg.cn/c8fe3652f71146d69da660db55c137d4.png#pic_center)
 
 ```sql
 +------+--------+--------+------+---------+---------------+----------+
