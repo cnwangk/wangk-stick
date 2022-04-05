@@ -1,3 +1,5 @@
+﻿git文件管理与索引，你真的懂git吗？
+@[toc]
 # 前言
 
 这一夜，注定是个不眠之夜，小白和cangls的对话已然进入了白热化。小白孜孜不倦的咨询关于git方面的知识，对索引越来越感兴趣。小白以前存的小电影文件可以进行版本的对比，探索哪个版本画质更好。
@@ -12,7 +14,7 @@ Linus Torvalds在Git邮件列表里曾说如果不先了解索引的目的，你
 
 本文为个人Git系列文章第二弹，git进阶内容之不得不了解的文件管理与索引。Git的索引不包含任何文件内容，它仅仅追踪你想要提交的那些内容。当执行git commit命令的时候，Git会通过检查索引而不是工作目录来找到提交的内容。虽然git在底层为了我们处理了很多事情，但记住索引和它的状态也很重要。在任何时候都可以通过git status命令来查询索引的状态。
 
-![](https://gitee.com/dywangk/img/raw/master/images/git%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86%E4%B8%8E%E7%B4%A2%E5%BC%95_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/71b2fa05c710128c817a75716ea31535.png)
 
 # 正文
 
@@ -389,7 +391,7 @@ VCS的经典问题之一就是文件重命名会导致它们丢失对文件历�
 **小白**：cangls啊，我以前使用过svn，没有用过Git，她们之间对重命名有啥区别吗？
 **cangls**：当然有了，下面就给你科普一下。内容很长，虽然很乏味，但请耐心看完。
 
-![](https://gitee.com/dywangk/img/raw/master/images/49f8713612915bca50250c94d34a7cf4_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/4cb64e9aef61918b91844ec711c5b57a.png)
 
 ### 1、追踪重命名注解介绍
 
@@ -439,13 +441,13 @@ VCS的经典问题之一就是文件重命名会导致它们丢失对文件历�
 
 除了工作目录下的file1和file2之外，master分支还有一个提交，它记录了与file1和file2内容完全一样的“foo”和“bar”的树。另外，该索引记录两个HSA1值 257cc5和5716ca，与那个两个文件分别对应。工作目录、索引及对象库都是同步一致的，没什么是脏的。
 
-![](https://gitee.com/dywangk/img/raw/master/images/git_pic1_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/6051935876609ed8046a5bd56ce46771.png)
 
 ### 2、示例图2
 
 图2显示了在工作记录中对file1编辑后的变化，现在它的内容包含“git”。索引和对象库中没有变化，但是工作目录现在是脏的。
 
-![](https://gitee.com/dywangk/img/raw/master/images/git_pic2_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/059bb76bfb11fc73169b335c0c7be9f9.png)
 
 当使用`git add file1`来暂存file1的编辑时，一些有趣的变化发生了。如图3所示。
 
@@ -453,13 +455,13 @@ VCS的经典问题之一就是文件重命名会导致它们丢失对文件历�
 
 git首先选取出工作目录中file1的版本，为它的内容计算一个SHA1散列ID（04848c），然后把那个ID保存在对象库中。接下来，Git就会记录在索引中的file1路径名已更新为新的（04848c）SHA1值。
 
-![](https://gitee.com/dywangk/img/raw/master/images/git_pic3_proc50.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/a933d4f47f1f6f3beff3a4a00bb65a01.png)
 
 ### 4、示例图4
 
 由于file2文件内容未发生改变而且没有任何`git add`来暂存file2，因此索引继续指向原始的blob对象。此时你已经在索引暂存了file1文件，而且工作目录和索引是一致的。不过，就HEAD而言，索引是脏的，因为索引中的树和在master分支的HEAD提交的树在对象库里是不一样的。最后，当所有变更暂存到版本库中，`git commit`的作用如图4。图4过程看着最为复杂，需要自己画图捋一捋。
 
-![](https://gitee.com/dywangk/img/raw/master/images/git_pic4_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/108097a4f86c814a78abfb46ae850aba.png)
 
 如图4所示，提交启动了三个步骤。首先，虚拟树对象（即索引）在转换成一个真实的树对象后，会以SHA1命名，然后存放到对象库中。其次，用你的日志消息创建一个新的提交对象。新的提交将会指向新创建的树对象以及前一个或父提交。最后，master分支的引用从最近一次提交移动到新创建的提交对象，成为新的master HEAD。
 
@@ -532,5 +534,6 @@ git add是加一个文件暂存起来，与之相反的就是git rm是将一个�
 **以上就是此次文章的所有内容的，希望能对你的工作有所帮助。感觉写的好，就拿出你的一键三连。如果感觉总结的不到位，也希望能留下您宝贵的意见，我会在文章中进行调整优化。**
 
 **原创不易，转载也请标明出处。不要改头换面，请尊重原创**。本文会不定期上传到gitee或者github以及发布到微信公众平台。**我的微信公众号与其他平台昵称都一样是龙腾万里sky**。
+
 
 <H5 align=center><a href="https://github.com/cnwangk/SQL-study">by 龙腾万里sky </a></H5>

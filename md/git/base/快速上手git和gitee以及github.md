@@ -1,19 +1,15 @@
-# 前言
+﻿你真的了解git、gitee、github吗？本文已经收录github仓库，已做更新。CSDN上的部分内容未更新，请访问github进行查看最新内容。
 
-hexo配合github还是挺方便的，毕竟在Windows平台我可以利用node.js安装hexo插件，进而配合一键生成模板然后提交到github。直接在hexo生成的blob模板中的markdown文件中写入你的文章。抛开通用性，markdown确实很方便。这里提供一下**hexo的网址**：
+> [https://github.com/cnwangk/SQL-study](https://github.com/cnwangk/SQL-study)
 
-- hexo的github仓库：[https://github.com/hexojs/hexo](https://github.com/hexojs/hexo)
-- hexo的中文文档：[https://hexo.io/zh-cn/docs/](https://hexo.io/zh-cn/docs/)
-- hexo中文github-pages教程：[https://hexo.io/zh-cn/docs/github-pages](https://hexo.io/zh-cn/docs/github-pages)
-- hexo安装deploy实现一键发布：[https://github.com/hexojs/hexo-deployer-git](https://github.com/hexojs/hexo-deployer-git)
-
+**初学者如何提高学习git的动力**。看完这个搭建的示例，相信你一定有前行的动力。
+> [https://cnwangk.github.io/](https://cnwangk.github.io/)
 
 你真的了解git、gitee、github吗？本文主要围绕git、gitee、github的使用展开介绍，如何一步步通过实践去打造自己的git工作环境。当然你可以作为写作环境，熟悉一门技术的有效方式就是应用实践。顺带会讲一些gitee和github的pages服务，搭建自己的个人网站。
 
 本文主要环境是在Windows下进行的，所以看到桌面或者在某一目录右键可以直接打开Git Bash。
-
-
-
+![](https://img-blog.csdnimg.cn/img_convert/d9221e03c8bf7fa3eac6131b62be9854.png)
+@[toc]
 # 正文
 
 至于我为什么将git工具放在最前面，是因为通过这个工具可以将gitee与github串联起来。可能有人会说，我可以在虚拟机上或者云服务器上搭建git环境测试。但我想说的是，白嫖她不香吗？直呼真香，小伙子有点东西啊！
@@ -22,15 +18,19 @@ hexo配合github还是挺方便的，毕竟在Windows平台我可以利用node.j
 
 **背景**
 
-现如今，难以想象有创意的人会在没有备份策略的情况启动一个项目。数据是短暂的，且容易丢失，例如通过一次错误的代码变更或者一次灾难性的磁盘崩溃。所以，在整个工作中持续性地备份和存档是非常明智的。
+ 现如今，难以想象有创意的人会在没有备份策略的情况启动一个项目。数据是短暂的，且容易丢失，例如通过一次错误的代码变更或者一次灾难性的磁盘崩溃。所以，在整个工作中持续性地备份和存档是非常明智的。
 
 对于文本和代码项目，备份策略通常包括版本控制，或者叫“对变更进行追踪管理”。每个开发人员都会进行若干变更。这些持续增长的变更，加在一起可以构成一个版本库，用于项目描述，团队沟通和产品管理。版本控制有着举足轻重的作用。
 
-一个可以管理和追踪软件代码或其他类似类容的不同版本工具。通常称为：版本控制系统（VCS），或者源代码管理器（SCM），或者修订控制系统（RCS）。或者其他各种“修订、代码、内容、版本、控制、管理以及系统”等相关叫法。但其实每二个工具都是出于同样的目的，开发以及维护开发出来的代码，方便管理控制历史记录和修改。
+ 一个可以管理和追踪软件代码或其他类似类容的不同版本工具。通常称为：版本控制系统（VCS），或者源代码管理器（SCM），或者修订控制系统（RCS）。或者其他各种“修订、代码、内容、版本、控制、管理以及系统”等相关叫法。
+
+但其实每二个工具都是出于同样的目的，开发以及维护开发出来的代码，方便管理控制历史记录和修改。
 
 **诞生**
 
-一句话简单概括：BitKeeper的所有方对免费版做了限制，Linus本人开始寻找替代品，在工作中开发出了有助于分布式开发的git版本控制管理工具。
+>一句话简单概括
+>
+>BitKeeper的所有方对免费版做了限制，Linus本人开始寻找替代品，在工作中开发出了有助于分布式开发的git版本控制管理工具。
 
 ### 1、git客户端工具下载地址
 
@@ -38,7 +38,7 @@ hexo配合github还是挺方便的，毕竟在Windows平台我可以利用node.j
 
 git下载地址：支持Linux/Unix、macOS、Windows
 
-![](https://gitee.com/dywangk/img/raw/master/images/git下载_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/0ce71d37d230aed473c2217de0b36109.png)
 
 
 
@@ -56,22 +56,19 @@ you sysadmin must hate you!
 
 
 
-**2.1、配置提交作者**
+2.1、配置提交作者
 
 安装好了git工具，此时可以在桌面右键（Git Bash），输入以下命令进行设置用户以及email。
 
 ```bash
-$ git config --global user.name "demo"
-$ git config --global user.email "demo@example.com"
+$ git config --global user.name "dywangk"
+$ git config --global user.email "dywangk@example.com"
 ```
 
-**2.2、生成ssh公钥**，Windows下默认在**系统盘的当前用的.ssh目录**下，可以配置ed25519或者是rsa方式都行，**github官网的教程推荐的是rsa方式**。
+2.2、生成ssh公钥，Windows下默认在**系统盘的当前用的.ssh目录**下
 
 ```bash
-#方式一
-$ ssh-keygen -t ed25519 -C "demo@example.com" 
-#方式二
-$ ssh-keygen -t rsa -b 4096 -C "demo@example.com"
+$ ssh -keygen -t ed25519 -C "test@example.com" 
 ```
 
 2.3、**gitee提供的方案配置多个key**
@@ -79,8 +76,8 @@ $ ssh-keygen -t rsa -b 4096 -C "demo@example.com"
 生成rsa文件时，以指定不同的文件命令作为区分gitee以及github生成的key文件。
 
 ```bash
-$ ssh-keygen -t rsa -b 4096 -C 'demo@company.com' -f ~/.ssh/gitee_id_rsa
-$ ssh-keygen -t rsa -b 4096 -C 'demo@163.com' -f ~/.ssh/github_id_rsa
+$ ssh-keygen -t rsa -C 'dywangk@company.com' -f ~/.ssh/gitee_id_rsa
+$ ssh-keygen -t rsa -C 'dywangk@163.com' -f ~/.ssh/github_id_rsa
 ```
 
 生成key后，然后在 ~/.ssh 目录下新建一个config文件，添加如下内容（其中Host和HostName填写git服务器的域名，IdentityFile指定私钥的路径）。看完后我大致明白了，是将gitee和github区分开来，分别读取不同的id_rsa文件的参数值。
@@ -109,15 +106,13 @@ $ ssh -T git@github.com
 
 
 
-配置好git之后，利用ssh -keygen命令生成ssh公钥，生成公钥所在的存储目录（以Windows环境为例）。生成完key后，可以通过VSCode、sublime text或者其她的辅助工具打开这个文件，复制到github的ssh公钥并保存。在下面的github介绍过程中，我有提到如何将生成的key保存到github并验证。同理gitee也是一样的操作过程，只是操作界面不一样而已。注意ssh-keygen之间没有空格，个人使用习惯打了个空格出来。
+配置好git之后，利用`ssh -keygen`命令生成ssh公钥，生成公钥所在的存储目录（以Windows环境为例）。生成完key后，可以通过`VSCode、sublime text`或者其她的辅助工具打开这个文件，复制到github的ssh公钥并保存。在下面的github介绍过程中，我有提到如何将生成的key保存到github并验证。同理gitee也是一样的操作过程，只是操作界面不一样而已。
 
-![](https://gitee.com/dywangk/img/raw/master/images/git%E7%94%9F%E6%88%90%E7%9A%84id_rsa%E5%AD%98%E5%82%A8%E7%9D%80ssh%E5%85%AC%E9%92%A5_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/807ecf533175645d105548dbaadfbb00.png)
 
-### 3、github加速访问
 
-**下载油猴管理脚本**，加入你需要的js脚本加速访问github：
 
-> [https://www.tampermonkey.net/](https://www.tampermonkey.net/)
+
 
 ## 二、gitee
 
@@ -157,8 +152,10 @@ gitee官网有很详细的中文说明文档，至于如何配置，我这里给
 
 >**GitHub**是通过[Git](https://zh.wikipedia.org/wiki/Git)进行[版本控制](https://zh.wikipedia.org/wiki/版本控制)的软件[源代码](https://zh.wikipedia.org/wiki/源代码)托管服务平台，由GitHub公司（曾称Logical Awesome）的开发者[Chris Wanstrath](https://zh.wikipedia.org/w/index.php?title=Chris_Wanstrath&action=edit&redlink=1)、[P. J. Hyett](https://zh.wikipedia.org/w/index.php?title=P._J._Hyett&action=edit&redlink=1)和[汤姆·普雷斯顿·沃纳](https://zh.wikipedia.org/wiki/汤姆·普雷斯顿·沃纳)使用[Ruby on Rails](https://zh.wikipedia.org/wiki/Ruby_on_Rails)编写而成。
 >
+
 >GitHub同时提供付费账户和免费账户。这两种账户都可以创建公开或私有的[代码仓库](https://zh.wikipedia.org/wiki/代码库)，但付费用户拥有更多功能。根据在2009年的Git用户调查，GitHub是最流行的[Git](https://zh.wikipedia.org/wiki/Git)访问站点。除了允许个人和组织创建和访问保管中的代码以外，它也提供了一些方便社会化共同软件开发的功能，即一般人口中的社群功能，包括允许用户追踪其他用户、组织、软件库的动态，对软件代码的改动和[bug](https://zh.wikipedia.org/wiki/程序错误)提出评论等。GitHub也提供了图表功能，用于概观显示开发者们怎样在代码库上工作以及软件的开发活跃程度。
 >
+
 >截止到2020年1月，GitHub已经有超过4000万注册用户和1.9亿代码库（包括至少2800万开源代码库），事实上已经成为了世界上最大的代码存放网站和[开源](https://zh.wikipedia.org/wiki/开放源代码)社区。
 >
 >2018年6月4日晚，[美国](https://zh.wikipedia.org/wiki/美国)科技公司[微软](https://zh.wikipedia.org/wiki/微軟)宣布以75亿美元的股票收购GitHub。
@@ -171,41 +168,41 @@ gitee官网有很详细的中文说明文档，至于如何配置，我这里给
 
 由于github是纯英文的，所以我会多配置一些截图并辅以说明，望理解。
 
-**2.1、github配置ssh公钥**
+2.1、**github配置ssh公钥**
 
 这里不仅仅是支持配置SSH keys，并且还支持配置GPG keys，需要下载支持的工具进行生成GPG公钥然后添加到github。当然，如果你要移除某一个key，点击Delete删除即可。
 
-![](https://gitee.com/dywangk/img/raw/master/images/github配置sshkeys_gpgkeys_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/dcf15a2c5b677308a25992efa989b0a9.png)
 
 [https://github.com/settings/ssh/new](https://github.com/settings/ssh/new)
 
 
 
-**2.2、账号设置**
+2.2、账号设置
 
 账号设置，可以修改用户名、以及删除你的账号（谨慎操作）。
 
-![](https://gitee.com/dywangk/img/raw/master/images/github账号设置_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/9ddf7cf7f8ca9fce2d4daf7323a9cb07.png)
 
 [https://github.com/settings/admin](https://github.com/settings/admin)
 
 
 
-**2.3、个人简介设置**
+2.3、个人简介设置
 
 此处是个人简介设置，比如公共邮箱设置、对自己的介绍、URL地址、Twitter用户名以及公司等等介绍。
 
-![](https://gitee.com/dywangk/img/raw/master/images/github%E4%B8%AA%E4%BA%BA%E8%B5%84%E6%96%99%E8%AE%BE%E7%BD%AE_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/af552feeabc99dcffffc151f90168df4.png)
 
 [https://github.com/settings/profile](https://github.com/settings/profile)
 
 
 
-**2.4、辅助邮箱设置**
+2.4、辅助邮箱设置
 
 设置邮箱后，可以使用设置好的邮箱进行登录操作，接收一些比如修改密码时可能需要邮箱验证。
 
-![](https://gitee.com/dywangk/img/raw/master/images/github邮箱设置_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/cbe066c9717c15cb8bdce636b47aefef.png)
 
 [https://github.com/settings/emails](https://github.com/settings/emails)
 
@@ -226,13 +223,13 @@ ssh -T git@github.com
 
 
 
-![](https://gitee.com/dywangk/img/raw/master/images/git使用ssh-T测试连接.png)
+![](https://img-blog.csdnimg.cn/img_convert/ecf9d365fc1c5726f3429eb0ae305304.png)
 
 
 
 下面是配置好了github的ssh公钥或者是GPG keys，进行测试验证，返回结果是成功。
 
-![](https://gitee.com/dywangk/img/raw/master/images/github配置ssh公钥访问验证.png)
+![](https://img-blog.csdnimg.cn/img_convert/703198ca0e4e38d1c4d0adac0852be19.png)
 
 
 
@@ -240,30 +237,17 @@ ssh -T git@github.com
 
 导入远程仓库选择**import repositories**，比如导入gitee的远程仓库。好吧，我一般是将github仓库同步至gitee作为镜像仓库使用。大家都懂得，长城网络的墙太殷实了，就算github被微软收购后这个访问速度依旧感人。
 
-![](https://gitee.com/dywangk/img/raw/master/images/github_%E6%96%B0%E5%BB%BA%E5%AF%BC%E5%85%A5%E4%BB%93%E5%BA%93_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/050d63d0c97f2ee51f34a258219ed8ab.png)
 
 例如，我**同步自己的写作工作空间**：
 
-![](https://gitee.com/dywangk/img/raw/master/images/github%E5%AF%BC%E5%85%A5%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/748df1b210e3203338f6fadbb086b884.png)
 
-**github一些使用介绍**，你的个人仓库（your repositories）、个人收藏的仓库（your stars）、个人设置（settings）
+github一些使用介绍，你的个人仓库（your repositories）、个人收藏的仓库（your stars）、个人设置（settings）
 
-![](https://gitee.com/dywangk/img/raw/master/images/github操作简介_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/35bcaa587c2e087826052e352bcb61ef.png)
 
 
-### 5、获取github私人令牌（token）
-
-**登录到github**，在个人设置（点右上角头像）找到**settings**（设置），左侧一栏滑到最下面找到**Developer settings**，然后选中**Personal access tokens**。每张截图下面都有附上设置的地址哟！
-
-![](https://gitee.com/dywangk/img/raw/master/images/github生成个人token_proc.jpg)
-
-[https://github.com/settings/tokens](https://github.com/settings/tokens)
-
-**新建token**，需要勾选自己需要的设置，然后填上标题。
-
-![](https://gitee.com/dywangk/img/raw/master/images/github_gen_token_proc.jpg)
-
-[https://github.com/settings/tokens/new](https://github.com/settings/tokens/new)
 
 ## 四、git基本命令介绍（实用型）
 
@@ -273,11 +257,11 @@ ssh -T git@github.com
 
 git初始化一个仓库时，会生成.git目录，是一个隐藏文件。linux下可以使用`ls -a`查看所有文件，Windows下打开资源管理器的显示隐藏项目才能看到该文件。下面给出Windows下的初始化后的git仓库示例：
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E5%88%9D%E5%A7%8B%E5%8C%96git%E5%90%8E%E7%94%9F%E6%88%90%E7%9A%84%E9%9A%90%E8%97%8Fgit%E6%96%87%E4%BB%B6.png)
+![](https://img-blog.csdnimg.cn/img_convert/24b5fb8d426c96a90cba50dada1705dd.png)
 
 隐藏目录文件列表如下，具体作用不做讲解。有兴趣的可以去逛逛官方文档，或者参考git相关的实体书。
 
-![](https://gitee.com/dywangk/img/raw/master/images/git隐藏目录文件.png)
+![](https://img-blog.csdnimg.cn/img_convert/ed00dab4c9412796860b20495aaaafa3.png)
 
 Windows下直接切换到test目录，并**初始化test这个目录**
 
@@ -286,7 +270,7 @@ Windows下直接切换到test目录，并**初始化test这个目录**
 $ git init
 ```
 
-![](https://gitee.com/dywangk/img/raw/master/images/git_init%E5%88%9D%E5%A7%8B%E5%8C%96test%E7%9B%AE%E5%BD%95.png)
+![](https://img-blog.csdnimg.cn/img_convert/d3d7e261dbae66ac486b3db32459522d.png)
 
 #### 1.2、git add将数据暂存
 
@@ -301,7 +285,7 @@ $ git add README.md
 
 提交创建好的README.md文件，显示如下图所示。这里只是示例，不代表最终推送到仓库。
 
-![](https://gitee.com/dywangk/img/raw/master/images/git%E6%8F%90%E4%BA%A4%E6%96%87%E4%BB%B6.png)
+![](https://img-blog.csdnimg.cn/img_convert/17ece8624b2807011852ae6387c4c9c6.png)
 
 ```bash
 #提交数据到仓库,提交全部
@@ -316,7 +300,7 @@ $ git commit README.md -m "新增README.md文件"
 $ git log
 ```
 
-![](https://gitee.com/dywangk/img/raw/master/images/git_log_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/6dc505d54192ff865b3ef5178e117ced.png)
 
 #### 1.4、git push推送提交的数据到远程仓库
 
@@ -385,15 +369,15 @@ $ git merge other_branch
 
 gitee的gitee pages，新建仓库，在服务这一栏会有显示。强调的是，开启gitee pages服务需要实名认证。
 
-![](https://gitee.com/dywangk/img/raw/master/images/gitee_pages_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/8daeeaf05b52d228928e937aa8790f99.png)
 
 gitee pages配置页面，这已经是配置好的界面，可以强制使用https安全协议。当你提交数据到仓库时，没有及时生效，就进入此页面进行更新操作，然后测试访问你的git pages仓库即可。
 
-比如访问我之前上传比较的感受一下。
+比如访问我之前上传比较的感受一下。曾经的虾米音乐，我只是保留了自己的歌单部分：
 
-[https://dywangk.gitee.io/sky](https://dywangk.gitee.io/sky)
+[https://dywangk.gitee.io/sky/%E5%BD%B1%E8%A7%86%E7%A5%9E%E6%9B%B2.html](https://dywangk.gitee.io/sky/影视神曲.html)
 
-![](https://gitee.com/dywangk/img/raw/master/images/gitee_pages%E6%9C%8D%E5%8A%A1_proc.jpg)
+![](https://img-blog.csdnimg.cn/img_convert/13276ecdc9139282e4e6b5a9beae595f.png)
 
 gitee官网有很详细的入门介绍，我这里只提一下，感兴趣的可以测试使用。
 
@@ -411,19 +395,15 @@ github pages的配置页面
 
 [https://pages.github.com/](https://pages.github.com/)
 
-**我测试配置了一个仓库**：2022最新版github pages配置界面
+**我测试配置了一个仓库**
 
-**注意**：仓库必须是公开的（public）、然后仓库命令可以命令为用户名加github.io。
+**注意**：仓库必须是公开的（public）、然后仓库命令可以命令为用户名加github.io
 
-默认进入一个设置好的**gh-pages**分支的仓库这样显示内容的：将gh-pages设置为默认仓库。
-
-**Custom domain**：配置域名，比如userName.github.io之外的域名。
-
-![](https://gitee.com/dywangk/img/raw/master/images/搭建github_pages服务_proc.jpg)
-
-
-
+![](https://img-blog.csdnimg.cn/img_convert/8daaad663ea41a6af4264dfeee26104f.png)
 简单的github pages 服务搭建示例，可以测试访问。
 
-[https://cnwangk.github.io/](https://cnwangk.github.io/)
+> [https://cnwangk.github.io/](https://cnwangk.github.io/)
 
+
+
+<H5 align=center><a href="https://blog.csdn.net/Tolove_dream">by 龙腾万里sky  转载请标明出处！</a></H5>
