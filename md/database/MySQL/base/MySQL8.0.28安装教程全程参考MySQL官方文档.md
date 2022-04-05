@@ -1,18 +1,17 @@
-﻿
-﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。MySQL官方示例库与文档地址已经补充。
+﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。MySQL官方示例库与文档地址已经补充。
+
+如果对你有帮助，我很荣幸。如果有误导你的地方，我表示抱歉。所有总结仅供参考。
 
 本文已收录至github仓库，有个人的Linux以及Windows方面的经验总结，持续更新中：
 
-> [https://github.com/cnwangk/SQL-study](https://github.com/cnwangk/SQL-study)
+> [https://github.com/cnwangk/wangk-stick](https://github.com/cnwangk/wangk-stick)
 
-@[toc]
+[toc]
 # 前言
 
 为了MySQL8.0.28安装教程我竟然在MySQL官方文档逛了一天，至此献给想入门MySQL8.0的初学者。以目前最新版本的MySQL8.0.28为示例进行安装与初步使用的详细讲解，面向初学者的详细教程。无论是Windows还是Linux上安装，咱都会。**这也许是迄今为止全网最最最详细的MySQL8.0.28的安装与使用教程**。
 
-温故而知新，可以为师矣。咱缺的是学习的途径吗？答案并不是，而是缺乏学习的方法。官方文档是很详细的，而且是权威的，其它的那些书籍、博文啊都是基于官方文档以及自己的使用经验总结的。写这篇文章的用意，希望大家可以总结自己的学习方法，善于利用官方文档来提升自己。
-
-**建议初学者多在命令行窗口下进行练习**，熟能生巧。达到一定的熟练程度，再借助客户端工具提高我们的工作效率。最终目的是啥？活下去呗，提高捞金能力。当然开个玩笑，回到正题，接着往下看。
+温故而知新，可以为师矣。**建议初学者多在命令行窗口下进行练习**，熟能生巧。达到一定的熟练程度，再借助客户端工具提高我们的工作效率。最终目的是啥？活下去呗，提高捞金能力。当然开个玩笑，回到正题，接着往下看。
 
 ![](https://img-blog.csdnimg.cn/img_convert/7b6a3c1312093fba007e4f7fb6bf909d.png)
 
@@ -24,7 +23,7 @@
 
 ## 一、MySQL8.0.28下载
 
-可以下载msi文件一键安装或者解压版zip文件进行命令行初始化安装。
+你可以下载msi文件一键安装，也可以下载解压版zip文件（Archive）进行命令行初始化安装，也是个人推荐的方式。
 
 MySQL官网下载地址
 
@@ -38,7 +37,9 @@ MySQL官网下载地址
 
 ### 2、Linux版本下载
 
-根据自己需要的Linux发行版版本适配的MySQL进行选择。比如，我个人选择的是自己比较熟悉的Redhat7系列进行下载。同样有bundle版本，包含了一些插件和依赖在里面，便于使用rpm包安装。安装单个的server服务，需要安装其它的依赖包比较繁琐。对于初学者，**建议直接下载RPM bundle版本**。我偏不，就要折腾。那也行，请接着往下看，一样提供了详细安装步骤。
+根据自己需要的Linux发行版版本适配的MySQL进行选择。安装方式多种多样，二进制包（MySQL-8.0.28-xx.tar.gz，打包成tar包然后压缩成gz格式）、rpm包以及源码包（source）安装。选择你擅长一种方式即可，没必要纠结，但也要根据实际场景进行下载安装。
+
+比如，我个人选择的是自己比较熟悉的Redhat7系列进行下载。同样有bundle版本，包含了一些插件和依赖在里面，便于使用rpm包安装。安装单个的server服务，需要安装其它的依赖包比较繁琐。对于初学者，**建议直接下载RPM bundle版本**。我偏不，就要折腾。那也行，请接着往下看，一样提供了详细安装步骤。
 
 ![](https://img-blog.csdnimg.cn/img_convert/bece1b1fe0b0d6895786b5f4cee4330a.png)
 
@@ -48,15 +49,56 @@ MySQL官网下载地址
 
 ![](https://img-blog.csdnimg.cn/img_convert/5d94094f47a22cfeb07461833128cc84.png)
 
+### 4、快捷进入MySQL服务
+提供一种思路，主要是为了方便，不管有没有配置环境变量，都可使用。仅仅是自己测试学习使用。
+
+个人比较懒，直接在桌面新建一个start_mysql.bat文件将执行命令放入进入，双击即可进入。安装多种数据库环境：新建bat文件进行管理，放桌面比较方便。
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/1f6beb0d3142460ea5afb0ef23d2c5df.png#)
+
+
+**示例如下**：
+```bash
+rem MariaDB
+cd d:\work\MariaDB\mariadb-10.5.6-winx64\bin
+d:
+cls
+mysql -uroot -p
+
+rem 安装了两个MySQL8.0服务实例,指定端口登录
+rem MySQL8.0 archive file
+cd D:\test\mysql-8.0.28-winx64\bin
+d:
+cls
+mysql -uroot -p123456 -P 3307
+
+
+rem MySQL8.0 msi file
+cd D:\test\MySQLServer8.0\bin
+d:
+cls
+mysql -uroot -p -P 3366
+
+```
+
+
 ## 二、MySQL8.0安装
 
-**初学者尝鲜，建议在Windows下安装**。
+MySQL在Windows平台提供了两种安装形式：
+
+1. msi文件：直接双击进行安装，有可视化界面，安装较为容易，但不够灵活。
+2. 归档包（archive）：以zip格式进行压缩，类似于Linux中的二进制包。比较灵活，只需几个命令即可安装服务和实例化。
+3. docker形式安装：其实是在容器中安装。
+
+**初学者尝鲜，建议在Windows下安装**。接下来介绍的是归档包（archive）安装与使用。
 
 一般情况，默认安装一个MySQL版本服务实例。也不排除预算有限，在同台服务器上安装多个实例进行测试。默认端口3306，如果在发布（生产）环境建议修改默认端口，达到不让别人一下就猜到的目的。接下来安装测试多个MySQL服务版本共存一个操作系统下，只针对于Windows下安装多个服务（没有使用虚拟机工具，真机环境下测试）。Linux下有便捷的yum源以及apt方式安装，一键安装所需依赖，但也有比较繁琐的rpm包安装。
 
 ### 1、Windows下安装MySQL8.0（zip包）
 
 配置环境变量，编辑系统环境变量，控制面板>所有控制面板项>系统>高级系统配置>**系统环境变量**：
+
+**注意**：如果是Windows10，直接将解压路径加入PATH环境变量即可。
 
 ```bash
 #变量名
@@ -66,9 +108,6 @@ D:\work\mysql-8.0.28-winx64\bin
 ```
 
 ![](https://img-blog.csdnimg.cn/img_convert/0221df1158d595cbac665375fe3876d7.png)
-
-msi文件安装就不介绍了，傻瓜式的一键安装，**注意选择路径**。
-
 **主要介绍解压版本zip的安装与实例化**：
 
 ```bash
@@ -149,17 +188,17 @@ mysqld --verbose --help > d:\work\mysql_win_help_docs.txt
 **参考官方文档**
 > Usage: mysqld.exe [OPTIONS]
 NT and Win32 specific options:
-  --install                     Install the default service (NT).
+  --install                     		Install the default service (NT).
   --install-manual              Install the default service started manually (NT).
   --install service_name        Install an optional service (NT).
-  --install-manual service_name Install an optional service started manually (NT).
-  --remove                      Remove the default service from the service list (NT).
+  --install-manual service_name I	nstall an optional service started manually (NT).
+  --remove                      			Remove the default service from the service list (NT).
   --remove service_name         Remove the service_name from the service list (NT).
   --enable-named-pipe           Only to be used for the default server (NT).
   --standalone                  Dummy option to start as a standalone server (NT).
   
 
-进入到解压后MySQL的bin目录下，执行安装服务命令：
+**进入到解压后MySQL的bin目录下**，执行安装服务命令：
 
 ```bash
 cd D:\work\mysql-8.0.28-winx64\bin
@@ -241,9 +280,35 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码'
 
 ### 2、Linux下安装MySQL8.0
 
-建议初学者不要像我这样去安装rpm包，**你可以直接下载rpm bundle，或者使用mysql官方的yum源**。个人有多年Linux使用经验，以及有一定的实际工作经验；知道如何判断哪些包是必须的，以及哪些需要被替换掉。
+Linux或者Unix安装MySQL有四种方式：
+
+1. rpm包安装：最为简单，但不灵活，适合初学者使用。
+2. 二进制包（binary package）：也称归档包（archive），编译好的源码包，比rpm包更灵活。个人认为是安装多个服务最佳选择。
+3. 源码包（source package）：最灵活，可根据需求编译安装功能，难易度最高。
+4. docker形式安装：其实是在容器中安装。
+
+使用rpm包安装MySQL其实相对较容易，只是缺少依赖包时比较繁琐，需要提前准备好所有依赖包。建议初学者不要像我这样去安装rpm包，**你可以直接下载rpm bundle，或者使用mysql官方的yum源**。
 
 **一定要注意Linux操作系统的权限问题**，**权限在最小范围内满足即可**。
+
+接下来将详细介绍在Redhat7系列使用rpm包形式安装MySQL8.0.28，也是最为简单的一种方式。持续更新中，二进制包与源码包安装教程也会陆续加进来。先简单介绍二进制包安装部分步骤，详细步骤在后续更新：
+```bash
+$> groupadd mysql     #创建mysql组                  
+$> useradd -r -g mysql -s /bin/false mysql    #创建mysql用户并做软链接 
+$> cd /usr/local      #切换到local目录                  
+$> tar xvf /path/to/mysql-VERSION-OS.tar.xz   #解压tar包mysql文件 
+$> ln -s full-path-to-mysql-VERSION-OS mysql  #创建软链接
+$> cd mysql   #进入到mysql目录
+$> mkdir mysql-files  #创建mysql-files目录
+$> chown mysql:mysql mysql-files #赋予mysql用户mysql-files目录权限
+$> chmod 750 mysql-files  #赋予mysql-files权限750
+$> bin/mysqld --initialize --user=mysql #初始化并设置用户为mysql
+$> bin/mysql_ssl_rsa_setup   
+$> bin/mysqld_safe --user=mysql &
+# Next command is optional 复制mysql.server脚本服务到Linux环境init.d目录，便于管理
+$> cp support-files/mysql.server /etc/init.d/mysql.server
+```
+
 
 **2.1、准备好安装包**
 
@@ -263,16 +328,6 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码'
 	mysql-community-common(x86-64) = 8.0.28-1.el7 被 mysql-community-server-8.0.28-1.el7.x86_64 需要
 	mysql-community-icu-data-files = 8.0.28-1.el7 被 mysql-community-server-8.0.28-1.el7.x86_64 需要
 
-[root@localhost mysql]# rpm -ivh mysql-community-icu-data-files-8.0.28-1.el7.x86_64.rpm 
-警告：mysql-community-icu-data-files-8.0.28-1.el7.x86_64.rpm: 头V4 RSA/SHA256 Signature, 密钥 ID 3a79bd29: NOKEY
-准备中...                          ################################# [100%]
-正在升级/安装...
-   1:mysql-community-icu-data-files-8.################################# [100%]
-[root@localhost mysql]# rpm -ivh mysql-community-common-8.0.28-1.el7.x86_64.rpm 
-警告：mysql-community-common-8.0.28-1.el7.x86_64.rpm: 头V4 RSA/SHA256 Signature, 密钥 ID 3a79bd29: NOKEY
-准备中...                          ################################# [100%]
-正在升级/安装...
-   1:mysql-community-common-8.0.28-1.e################################# [100%]
 
 [root@localhost mysql]# rpm -ivh mysql-community-client-8.0.28-1.el7.x86_64.rpm 
 警告：mysql-community-client-8.0.28-1.el7.x86_64.rpm: 头V4 RSA/SHA256 Signature, 密钥 ID 3a79bd29: NOKEY
@@ -283,14 +338,15 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码'
 
 
 
-**2.2.1、安装依赖包**，然后使用`rpm -qa | grep mysql`查询哪些被安装了。怎么传到服务器上，简单一点scp命令即可。
+**2.2.1、安装依赖包**，然后使用`rpm -qa | grep mysql`查询哪些被安装了。
+
+怎么传到服务器上，简单一点scp命令即可。这里也仅限于自己测试，实际山是需要用户名密码以及网络是打通的才可进行操作。
 
 ![](https://img-blog.csdnimg.cn/img_convert/7863370c5f41c7f75b8772df486cef2b.png)
 
 **安装rpm包的步骤方法一**，严格按照我所写的顺序来，非root用户使用sudo提权：
 
 ```bash
-[root@localhost mysql]# rpm -qa | grep mysql
 rpm -ivh mysql-community-client-plugins-8.0.28-1.el7.x86_64.rpm
 rpm -ivh mysql-community-common-8.0.28-1.el7.x86_64.rpm
 rpm -ivh mysql-community-icu-data-files-8.0.28-1.el7.x86_64.rpm
@@ -300,13 +356,18 @@ rpm -ivh mysql-community-client-8.0.28-1.el7.x86_64.rpm
 rpm -ivh mysql-community-server-8.0.28-1.el7.x86_64.rpm
 ```
 
+安装完成，使用rpm命令查询mysql的rpm包：
+```bash
+[root@localhost mysql]# rpm -qa | grep mysql
+```
+
 **安装rpm包的步骤方法二**，使用Redhat系列提供的yum工具安装，好处在于不用挨个按提示的循序安装rpm包。
 
 切换至我准备好所有必备的rpm包目录，然后使用yum命令一键安装依赖。
 
 ```bash
 $ sudo yum remove mariadb-libs
-$ cd /opt/soft/mysql
+$ cd /opt/soft/mysql      #这一步是进入到rpm包存放目录
 $ sudo yum -y install mysql-community*
 ```
 
@@ -1232,11 +1293,9 @@ public class TestConnMySQL8 {
 以上就是本次MySQL8.0.28安装与使用的全部内容，希望能对你的工作与学习有所帮助。感觉写的好，就拿出你的一键三连。在公众号上更新的可能要快一点，目前还在完善中。**能看到这里的，都是帅哥靓妹**。如果感觉总结的不到位，也希望能留下您宝贵的意见，我会在文章中进行调整优化。
 ![](https://img-blog.csdnimg.cn/img_convert/9274af9e14216005237b8c9698286908.png)
 
-原创不易，转载也请标明出处和作者，尊重原创。不定期上传到github。**MySQL系列文章**：《**MySQL开发篇，存储引擎的选择真的很重要吗？**》已经上传至github仓库SQL-study。
+原创不易，转载也请标明出处和作者，尊重原创。不定期上传到github。**MySQL系列文章**：《**MySQL开发篇，存储引擎的选择真的很重要吗？**》已经上传至github仓库wangk-stick。
 
-**tips**：使用hexo搭建的静态博客也会定期更新维护。
 
-<H5 align=center><a href="https://github.com/cnwangk/SQL-study">作者：龙腾万里sky</a></H5>
 
 
 
