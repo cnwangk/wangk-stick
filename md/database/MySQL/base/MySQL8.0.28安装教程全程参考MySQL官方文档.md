@@ -6,7 +6,8 @@
 
 > [https://github.com/cnwangk/wangk-stick](https://github.com/cnwangk/wangk-stick)
 
-[toc]
+[TOC]
+
 # 前言
 
 为了MySQL8.0.28安装教程我竟然在MySQL官方文档逛了一天，至此献给想入门MySQL8.0的初学者。以目前最新版本的MySQL8.0.28为示例进行安装与初步使用的详细讲解，面向初学者的详细教程。无论是Windows还是Linux上安装，咱都会。**这也许是迄今为止全网最最最详细的MySQL8.0.28的安装与使用教程**。
@@ -50,14 +51,15 @@ MySQL官网下载地址
 ![](https://img-blog.csdnimg.cn/img_convert/5d94094f47a22cfeb07461833128cc84.png)
 
 ### 4、快捷进入MySQL服务
+
 提供一种思路，主要是为了方便，不管有没有配置环境变量，都可使用。仅仅是自己测试学习使用。
 
 个人比较懒，直接在桌面新建一个start_mysql.bat文件将执行命令放入进入，双击即可进入。安装多种数据库环境：新建bat文件进行管理，放桌面比较方便。
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/1f6beb0d3142460ea5afb0ef23d2c5df.png#)
 
-
 **示例如下**：
+
 ```bash
 rem MariaDB
 cd d:\work\MariaDB\mariadb-10.5.6-winx64\bin
@@ -78,9 +80,7 @@ cd D:\test\MySQLServer8.0\bin
 d:
 cls
 mysql -uroot -p -P 3366
-
 ```
-
 
 ## 二、MySQL8.0安装
 
@@ -122,7 +122,7 @@ mysql-8.0.28-winx64.zip
 [client]
 # 设置mysql客户端默认字符集
 default-character-set=utf8
- 
+
 [mysqld]
 # 设置3307端口,有多个服务，为了不冲突修改默认的3306端口为3307
 port=3307
@@ -139,7 +139,6 @@ default-storage-engine=INNODB
 ```
 
 **1.2、实例化**
-
 
 **得到反馈说执行-initialize-insecure'mysqld' 不是内部或外部命令，也不是可运行的程序或批处理文件**。
 
@@ -182,21 +181,23 @@ D:\work\mysql-8.0.28-winx64\bin> mysqld --initialize-insecure
 **1.3、安装服务**
 
 在Powershell中将帮助文档输出到指定文件mysql_win_help_docs.txt：
+
 ```bash
 mysqld --verbose --help > d:\work\mysql_win_help_docs.txt
 ```
+
 **参考官方文档**
+
 > Usage: mysqld.exe [OPTIONS]
-NT and Win32 specific options:
-  --install                     		Install the default service (NT).
-  --install-manual              Install the default service started manually (NT).
-  --install service_name        Install an optional service (NT).
-  --install-manual service_name I	nstall an optional service started manually (NT).
-  --remove                      			Remove the default service from the service list (NT).
-  --remove service_name         Remove the service_name from the service list (NT).
-  --enable-named-pipe           Only to be used for the default server (NT).
-  --standalone                  Dummy option to start as a standalone server (NT).
-  
+> NT and Win32 specific options:
+>   --install                             Install the default service (NT).
+>   --install-manual              Install the default service started manually (NT).
+>   --install service_name        Install an optional service (NT).
+>   --install-manual service_name I    nstall an optional service started manually (NT).
+>   --remove                                  Remove the default service from the service list (NT).
+>   --remove service_name         Remove the service_name from the service list (NT).
+>   --enable-named-pipe           Only to be used for the default server (NT).
+>   --standalone                  Dummy option to start as a standalone server (NT).
 
 **进入到解压后MySQL的bin目录下**，执行安装服务命令：
 
@@ -292,6 +293,7 @@ Linux或者Unix安装MySQL有四种方式：
 **一定要注意Linux操作系统的权限问题**，**权限在最小范围内满足即可**。
 
 接下来将详细介绍在Redhat7系列使用rpm包形式安装MySQL8.0.28，也是最为简单的一种方式。持续更新中，二进制包与源码包安装教程也会陆续加进来。先简单介绍二进制包安装部分步骤，详细步骤在后续更新：
+
 ```bash
 $> groupadd mysql     #创建mysql组                  
 $> useradd -r -g mysql -s /bin/false mysql    #创建mysql用户并做软链接 
@@ -302,13 +304,39 @@ $> cd mysql   #进入到mysql目录
 $> mkdir mysql-files  #创建mysql-files目录
 $> chown mysql:mysql mysql-files #赋予mysql用户mysql-files目录权限
 $> chmod 750 mysql-files  #赋予mysql-files权限750
-$> bin/mysqld --initialize --user=mysql #初始化并设置用户为mysql
-$> bin/mysql_ssl_rsa_setup   
-$> bin/mysqld_safe --user=mysql &
-# Next command is optional 复制mysql.server脚本服务到Linux环境init.d目录，便于管理
+$> bin/mysqld --initialize --user=mysql #初始化并设置用户为mysql，生成随机密码会打印在字符界面（使用 --initialize-insecure则设置空密码）
+$> bin/mysql_ssl_rsa_setup   #启动ssl_rsa验证
+$> bin/mysqld_safe --user=mysql & #启动服务
+# Next command is optional  #复制mysql.server脚本服务到Linux环境init.d目录，便于管理
 $> cp support-files/mysql.server /etc/init.d/mysql.server
 ```
 
+以龙蜥系统8.4GA进行简单说明：
+1.必备安装包（兼容Centos8，缺少依赖包）：
+
+```bash
+$> yum install libaio # install library
+$> yum install ncurses-compat-libs
+```
+
+2.启动服务，可以写入脚本设置开机自启。
+
+此处只做示例说明，具体使用结合实际情况。
+vim mysql_start.sh
+
+```bash
+#!/bin/bash
+/usr/local/mysql/bin/mysqld_safe --user=mysql &
+```
+
+3.登录到mysql
+
+```sql
+mysql -uroot -p
+```
+
+4.使用AnolisOS-8.4-minimal版本注意事项
+如果使用AnolisOS-8.4-minimal版本，一些基本工具包没有安装，比如vim、ifconfig、wget等等。
 
 **2.1、准备好安装包**
 
@@ -324,19 +352,17 @@ $> cp support-files/mysql.server /etc/init.d/mysql.server
 [mysql@localhost ~]$ rpm -ivh mysql-community-server-8.0.28-1.el7.x86_64.rpm 
 警告：mysql-community-server-8.0.28-1.el7.x86_64.rpm: 头V4 RSA/SHA256 Signature, 密钥 ID 3a79bd29: NOKEY
 错误：依赖检测失败：
-	mysql-community-client(x86-64) >= 8.0.11 被 mysql-community-server-8.0.28-1.el7.x86_64 需要
-	mysql-community-common(x86-64) = 8.0.28-1.el7 被 mysql-community-server-8.0.28-1.el7.x86_64 需要
-	mysql-community-icu-data-files = 8.0.28-1.el7 被 mysql-community-server-8.0.28-1.el7.x86_64 需要
+    mysql-community-client(x86-64) >= 8.0.11 被 mysql-community-server-8.0.28-1.el7.x86_64 需要
+    mysql-community-common(x86-64) = 8.0.28-1.el7 被 mysql-community-server-8.0.28-1.el7.x86_64 需要
+    mysql-community-icu-data-files = 8.0.28-1.el7 被 mysql-community-server-8.0.28-1.el7.x86_64 需要
 
 
 [root@localhost mysql]# rpm -ivh mysql-community-client-8.0.28-1.el7.x86_64.rpm 
 警告：mysql-community-client-8.0.28-1.el7.x86_64.rpm: 头V4 RSA/SHA256 Signature, 密钥 ID 3a79bd29: NOKEY
 错误：依赖检测失败：
-	mysql-community-client-plugins = 8.0.28-1.el7 被 mysql-community-client-8.0.28-1.el7.x86_64 需要
-	mysql-community-libs(x86-64) >= 8.0.11 被 mysql-community-client-8.0.28-1.el7.x86_64 需要
+    mysql-community-client-plugins = 8.0.28-1.el7 被 mysql-community-client-8.0.28-1.el7.x86_64 需要
+    mysql-community-libs(x86-64) >= 8.0.11 被 mysql-community-client-8.0.28-1.el7.x86_64 需要
 ```
-
-
 
 **2.2.1、安装依赖包**，然后使用`rpm -qa | grep mysql`查询哪些被安装了。
 
@@ -357,6 +383,7 @@ rpm -ivh mysql-community-server-8.0.28-1.el7.x86_64.rpm
 ```
 
 安装完成，使用rpm命令查询mysql的rpm包：
+
 ```bash
 [root@localhost mysql]# rpm -qa | grep mysql
 ```
@@ -414,6 +441,7 @@ tips：你也可以将mysql用户加入到/etc/sudoers配置文件中，限制my
 **2.3、初始化**
 
 每个人的安装环境有所差异。可以参考官方文档，关于初始化有详细的说明：
+
 > [https://dev.mysql.com/doc/refman/8.0/en/data-directory-initialization.html](https://dev.mysql.com/doc/refman/8.0/en/data-directory-initialization.html)
 
 设置密码为空，后续登录可修改密码
@@ -462,6 +490,7 @@ $ systemctl restart mysqld
 ```bash
 $ mysql -uroot -p
 ```
+
 **关于启动mysqld服务出现权限不足的问题，在mysql和Oracle官方都不提倡使用root用户来管理**。
 
 ```bash
@@ -489,6 +518,7 @@ $ mysql -uroot -p
 [root@mysql ~]# systemctl status mysqld
 [root@mysql ~]# mysql -uroot -p
 ```
+
 **2.5、设置防火墙**
 
 加入mysql服务以及需要的端口3306
@@ -616,8 +646,6 @@ $ systemctl start mysqld
 $ mysql -u root -p
 ```
 
-
-
 ### 4、Windows下安装MySQL8.0（MSI文件）
 
 **作为补充说明**：详细安装不做截图，只写注意事项。
@@ -629,8 +657,6 @@ $ mysql -u root -p
 
 ![](https://img-blog.csdnimg.cn/img_convert/cfa3023aafcd916e2a5470a4010b5d98.png)
 
-
-
 **注意：选择安装路径有空格，可能会产生影响，最好去掉。默认安装路径在C盘，我这里改为自己的管理路径**。
 
 方法有多种，这里采取先卸载服务，然后安装服务，最后修改注册表指定mysqld和my.ini路径。
@@ -638,25 +664,25 @@ $ mysql -u root -p
 1. **以管理员身份运行CMD命令**
 
 2. 执行命令进入D盘
-
+   
    ```bash
    d:
    ```
 
 3. 进入MySQL服务的bin目录
-
+   
    ```bash
    cd D:\software\MySQL\MySQLServer8.0\bin\
    ```
 
 4. 卸载原有MySQL80服务
-
+   
    ```bash
    mysqld remove MySQL80
    ```
 
 5. 重新安装MySQL服务，注意服务名不要重复
-
+   
    ```bash
    mysqld install MySQL
    ```
@@ -666,24 +692,22 @@ $ mysql -u root -p
 
 7. 修改注册表对应路径和默认my.ini路径（可能需要重启）
    注册表路径：计算机\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\MySQL
-
+   
    ![](https://img-blog.csdnimg.cn/img_convert/376cc3230d4291b318d0a77d25183e31.png)
-
+   
    修改imagePath值，**注意改成你自己安装路径**：
-
+   
    ```bash
    "D:\software\MySQL\MySQLServer8.0\bin\mysqld.exe" --defaults-file="D:\software\MySQL\data\MySQLServer8.0\my.ini" MySQL
    ```
 
 8. 登录时，选择端口（基于多个服务实例共存），-P大写P后面接在my.ini配置文件中指定的端口。
-
+   
    ```bash
    mysql -uroot -p -P 3366
    ```
 
 **仅供参考**，虽然个人在win10环境得以解决，但不一定适用你的系统环境。
-
-
 
 ## 三、MySQL8.0使用
 
@@ -730,7 +754,7 @@ net start mysql
 
 注意：在Windows下使用cmd命令窗口以管理员身份运行登录，没有配置环境变量也没关系，切换到MySQL安装的bin目录下执行命令。
 
-````sql
+```sql
 -- 第一步执行d:，切换到D盘
 d:
 -- 第二步执行cd命令，切换到个人安装mysql的bin目录下
@@ -747,7 +771,7 @@ mysql> select version();
 +-----------+
 1 row in set (0.00 sec)
 ```
-````
+```
 
 ![](https://img-blog.csdnimg.cn/img_convert/842e5e9623b5a5156bdbaf67b9b1f6aa.png)
 
@@ -759,8 +783,6 @@ mysql> select version();
 - 最后进行简单的交互，并查询数据库版本。
 
 **1.2、初步使用命令行模式进行交互**
-
-
 
 ![](https://img-blog.csdnimg.cn/img_convert/01d10238ecaa7e9ebdd0e879e67b9cc6.png)
 
@@ -919,8 +941,6 @@ ERROR 1142 (42000): INSERT command denied to user 'test'@'localhost' for table '
 
 ![](https://img-blog.csdnimg.cn/img_convert/dd443b23a84d93f6242ba34fef8d13e3.png)
 
-
-
 **3.2、授权root用户远程登录，MySQL8.0授权方式**
 
 用户授权，在MySQL8.0版本中变得更加严格，以前MySQL5.6或者5.7版本中可以执行授权的方式有了变化。经过个人亲测，操作如下。
@@ -959,7 +979,6 @@ MySQL8.0之前的授权方式（**5.6或者5.7都支持这种方式授权**）
 ```sql
 GRANT ALL PRIVILEGES ON *.* TO '你的用户名'@'你的IP地址' IDENTIFIED BY '设置的密码' WITH GRANT OPTION;
 ```
-
 
 示例：授权root户，**所有IP都可连接**。
 
@@ -1073,32 +1092,32 @@ DELETE FROM STUDY;
 
 至此基本的创建用户、创建数据库、增删改查都会使用了。
 
-
 ### 5、MySQL官方文档下载地址
+
 左侧导航栏有个Download this Manual：MySQL文档下载地址。
 
 以下给出目前比较火热的三个版本下载地址：
 
-
 1. MySQL8.0在线文档
-[https://dev.mysql.com/doc/refman/8.0/en](https://dev.mysql.com/doc/refman/8.0/en)
+   [https://dev.mysql.com/doc/refman/8.0/en](https://dev.mysql.com/doc/refman/8.0/en)
 
 2. MySQL8.0文档PDF文件下载地址
-[https://downloads.mysql.com/docs/refman-8.0-en.a4.pdf](https://downloads.mysql.com/docs/refman-8.0-en.a4.pdf)
+   [https://downloads.mysql.com/docs/refman-8.0-en.a4.pdf](https://downloads.mysql.com/docs/refman-8.0-en.a4.pdf)
 
 3. MySQL5.7在线文档
-[https://dev.mysql.com/doc/refman/5.7/en/](https://dev.mysql.com/doc/refman/5.7/en/)
+   [https://dev.mysql.com/doc/refman/5.7/en/](https://dev.mysql.com/doc/refman/5.7/en/)
 
 4. MySQL5.7文档PDF文件下载地址
-[https://downloads.mysql.com/docs/refman-5.7-en.a4.pdf](https://downloads.mysql.com/docs/refman-5.7-en.a4.pdf)
+   [https://downloads.mysql.com/docs/refman-5.7-en.a4.pdf](https://downloads.mysql.com/docs/refman-5.7-en.a4.pdf)
 
 5. MySQL5.6在线文档
-[https://dev.mysql.com/doc/refman/5.6/en/](https://dev.mysql.com/doc/refman/5.6/en/)
+   [https://dev.mysql.com/doc/refman/5.6/en/](https://dev.mysql.com/doc/refman/5.6/en/)
 
-4. MySQL5.6文档PDF文件下载地址
-[https://downloads.mysql.com/docs/refman-5.6-en.a4.pdf](https://downloads.mysql.com/docs/refman-5.6-en.a4.pdf)
+6. MySQL5.6文档PDF文件下载地址
+   [https://downloads.mysql.com/docs/refman-5.6-en.a4.pdf](https://downloads.mysql.com/docs/refman-5.6-en.a4.pdf)
 
 ### 6、MySQL官方示例库
+
 给出**sakila-db数据库**包含三个文件，便于大家获取与使用：
 
 1. sakila-schema.sql：数据库表结构；
@@ -1112,7 +1131,6 @@ DELETE FROM STUDY;
 **只是用于用于简单测试学习，建议使用world-db**：
 
 > [https://downloads.mysql.com/docs/world-db.zip](https://downloads.mysql.com/docs/world-db.zip)
-
 
 ## 四、MySQL连接工具
 
@@ -1176,8 +1194,6 @@ try {
 }
 ```
 
-
-
 ### 2、JDBC测试连接MySQL8.0数据库
 
 **2.1、maven配置**
@@ -1225,56 +1241,56 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TestConnMySQL8 {
-    
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {	
-		TestSQLConnMySQL();
-	}
-	private static final Logger log = LoggerFactory.getLogger(TestConnMySQL8.class);
-	//初始化参数
-	static Connection conn = null;
-	static PreparedStatement ps = null;
-	static ResultSet rs = null;
-	/**
-	 * @throws SQLException
-	 * @throws ClassNotFoundException
-	 */
-	private static void TestSQLConnMySQL() throws SQLException, ClassNotFoundException {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			/**
-			 * 1.获取连接参数url,username,password,默认端口是3306
-			 * MySQL：url ="jdbc:mysql://127.0.0.1:3306/test";
-			 */
-			/** MySQL拼接url **/
-			String url = "jdbc:mysql://192.168.245.147:3306/TEST?useUnicode=true&characterEncoding=utf-8";
-			String username = "root";
-			String password = "Mysql@123456";
-			//获取连接
-			conn = DriverManager.getConnection(url, username, password);
-			if(null != conn) {
-				log.info("connect database success...");
-			}else {
-				log.error("connect database failed...");
-			}
-			//查询数据库
-			String sql = "SELECT * FROM STUDY";
-			// 3.通过preparedStatement执行SQL
-			ps = conn.prepareStatement(sql);	
-			// 4.执行查询,获取结果集
-			rs = ps.executeQuery();
-			// 5.遍历结果集，前提是你的数据库创建了表以及有数据
-			while (rs.next()) {
-				//对应数据库表中字段类型Int使用getInt，varchar使用getString
-				System.out.println("ID:" + rs.getInt("ID"));
-				System.out.println("姓名：" + rs.getString("NAMES"));
-			}
-		} finally {
-			// 6.关闭连接 释放资源
-			rs.close();
-			ps.close();
-			conn.close();
-		}
-	}
+
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {    
+        TestSQLConnMySQL();
+    }
+    private static final Logger log = LoggerFactory.getLogger(TestConnMySQL8.class);
+    //初始化参数
+    static Connection conn = null;
+    static PreparedStatement ps = null;
+    static ResultSet rs = null;
+    /**
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+    private static void TestSQLConnMySQL() throws SQLException, ClassNotFoundException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            /**
+             * 1.获取连接参数url,username,password,默认端口是3306
+             * MySQL：url ="jdbc:mysql://127.0.0.1:3306/test";
+             */
+            /** MySQL拼接url **/
+            String url = "jdbc:mysql://192.168.245.147:3306/TEST?useUnicode=true&characterEncoding=utf-8";
+            String username = "root";
+            String password = "Mysql@123456";
+            //获取连接
+            conn = DriverManager.getConnection(url, username, password);
+            if(null != conn) {
+                log.info("connect database success...");
+            }else {
+                log.error("connect database failed...");
+            }
+            //查询数据库
+            String sql = "SELECT * FROM STUDY";
+            // 3.通过preparedStatement执行SQL
+            ps = conn.prepareStatement(sql);    
+            // 4.执行查询,获取结果集
+            rs = ps.executeQuery();
+            // 5.遍历结果集，前提是你的数据库创建了表以及有数据
+            while (rs.next()) {
+                //对应数据库表中字段类型Int使用getInt，varchar使用getString
+                System.out.println("ID:" + rs.getInt("ID"));
+                System.out.println("姓名：" + rs.getString("NAMES"));
+            }
+        } finally {
+            // 6.关闭连接 释放资源
+            rs.close();
+            ps.close();
+            conn.close();
+        }
+    }
 }
 ```
 
@@ -1283,10 +1299,9 @@ public class TestConnMySQL8 {
 ![](https://img-blog.csdnimg.cn/img_convert/984339518b7a6600ac764f335d4f02a5.png)
 
 **参考文献**：
+
 - MySQL8.0官方文档
 - MySQL帮助文档，执行命令即可获取：mysqld --verbose --help
-
-
 
 # 总结
 
@@ -1294,11 +1309,3 @@ public class TestConnMySQL8 {
 ![](https://img-blog.csdnimg.cn/img_convert/9274af9e14216005237b8c9698286908.png)
 
 原创不易，转载也请标明出处和作者，尊重原创。不定期上传到github。**MySQL系列文章**：《**MySQL开发篇，存储引擎的选择真的很重要吗？**》已经上传至github仓库wangk-stick。
-
-
-
-
-
-
-
-
