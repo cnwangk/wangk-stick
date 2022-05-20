@@ -14,9 +14,9 @@
     - Linux入门教程，原来还可以这样学
     - Linux服务器挂载硬盘与磁盘管理
   - [nginx](https://github.com/cnwangk/wangk-stick/tree/master/md/nginx)：nginx中间件实战总结。
-  - [MySQL](https://github.com/cnwangk/wangk-stick/tree/master/md/SQL/MySQL)：MySQL数据库知识总结。
-  - [Oracle](https://github.com/cnwangk/wangk-stick/tree/master/md/SQL/Oracle)：Oracle数据库实战经验分享。
-  - [DM8](https://github.com/cnwangk/wangk-stick/tree/master/md/SQL/dm8)：国产DM8数据库实战经验分享。
+  - [MySQL](https://github.com/cnwangk/wangk-stick/tree/master/md/database/MySQL)：MySQL数据库知识总结。
+  - [Oracle](https://github.com/cnwangk/wangk-stick/tree/master/md/database/Oracle)：Oracle数据库实战经验分享。
+  - [DM8](https://github.com/cnwangk/wangk-stick/tree/master/md/database/dm8)：国产DM8数据库实战经验分享。
   - [Redis](https://github.com/cnwangk/wangk-stick/tree/master/md/Redis)：Redis入门以及实战经验分享。
   - [git](https://github.com/cnwangk/wangk-stick/tree/master/md/git)：git入门指南以及搭建工作环境。
   - [markdown_tools](https://github.com/cnwangk/wangk-stick/tree/master/md/markdown_tools)：markdown工具使用，搭建免费图床。
