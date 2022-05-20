@@ -19,7 +19,7 @@
   - [DM8](https://github.com/cnwangk/wangk-stick/tree/master/md/database/dm8)：国产DM8数据库实战经验分享。
   - [Redis](https://github.com/cnwangk/wangk-stick/tree/master/md/Redis)：Redis入门以及实战经验分享。
   - [git](https://github.com/cnwangk/wangk-stick/tree/master/md/git)：git入门指南以及搭建工作环境。
-  - [markdown_tools](https://github.com/cnwangk/wangk-stick/tree/master/md/markdown_tools)：markdown工具使用，搭建免费图床。
+  - [markdown_tools](https://github.com/cnwangk/wangk-stick/tree/master/md/tools/markdown_tools)：markdown工具使用，搭建免费图床。
   - [vsftpd](https://github.com/cnwangk/wangk-stick/tree/master/md/linux/vsftpd)：Linux下vsftp搭建教程。
   - [zabbix](https://github.com/cnwangk/wangk-stick/tree/master/md/zabbix)：使用MySQL搭建分布式监控系统。
   - Kafka：准备中。。。
