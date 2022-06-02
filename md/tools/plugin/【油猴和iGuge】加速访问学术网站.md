@@ -1,3 +1,10 @@
+---
+title: 【油猴和iGuge】加速访问学术网站
+date: 2022-03-27 
+tags: 工具篇
+categories: 好好学习
+---
+
 【油猴和iGuge】加速访问学术网站，好好学习，天天向上。
 
 如果在某csdn搜索到我的博客，请在搜索的参数后加上：
@@ -11,7 +18,7 @@ iGuge作为一款免费访问Google的插件，挺好用（偶尔会抽风），
 
 iGuge谷歌访问助手，是我目前为止用过最稳定的一款插件，作为免费版使用相当可以了，能访问维基百科。
 
-![](https://gitee.com/dywangk/img/raw/master/images/iGuge%E6%8F%92%E4%BB%B6%E9%A2%98%E5%9B%BE_proc.jpg)
+![](https://article.biliimg.com/bfs/article/5c670f0d61dd84ae76080122de3fb075ef289a9e.png)
 
 [toc]
 
@@ -24,12 +31,12 @@ iGuge谷歌访问助手，是我目前为止用过最稳定的一款插件，作
 
 > [https://iguge.xyz/](https://iguge.xyz/)
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85_proc.jpg)
+![](https://article.biliimg.com/bfs/article/1adaa73bccd66d87eec80257cf918fbd33e248b3.png)
 
 ### 02 浏览器扩展中心下载
-如果在浏览器扩展中心可以搜索到iGuge，直接下载。（谷歌、火狐是可以直接搜到的）
+如果在浏览器扩展中心可以搜索到iGuge，直接下载。（谷歌是可以直接搜到的）
 
-![](https://gitee.com/dywangk/img/raw/master/images/Google_Chrome_iguge_proc.jpg)
+![](https://article.biliimg.com/bfs/article/fde5e1c2b010dc07c31b173f43124d55c7083cd7.png)
 
 ### 03 直接访问下载插件
 当然也可以下载crx插件,直接拖到浏览器扩展中心进行安装，或者点击打开选择浏览器安装。
@@ -45,15 +52,14 @@ iGuge谷歌访问助手，是我目前为止用过最稳定的一款插件，作
 ### 01 Chrome安装方式一
 直接在浏览器地址栏输入：chrome://extensions/，进入扩展中心。
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5extensions.png)
+![](https://article.biliimg.com/bfs/article/54e202933eb0ba2ff3acecb984c6b5ddc08c89ad.png)
 
 主流的浏览器一般都支持：
 
 1. Google Chrome，谷歌浏览器
-2. Firefox Chrome，火狐浏览器
 3. 360 Chrome，360极速浏览器
 
-![](https://gitee.com/dywangk/img/raw/master/images/%E5%AE%89%E8%A3%85crx%E6%8F%92%E4%BB%B604_proc.jpg)
+![](https://article.biliimg.com/bfs/article/057d30519417cc9196d79435f89cd44b73678997.png)
 
 ### 02 Chrome安装方式二
 1. 找到更多工具
@@ -69,15 +75,15 @@ iGuge谷歌访问助手，是我目前为止用过最稳定的一款插件，作
 2. 找到更多工具。
 3. 找到扩展程序，点击进入。
 
-![](https://gitee.com/dywangk/img/raw/master/images/Chrome_%E6%89%A9%E5%B1%95%E7%A8%8B%E5%BA%8F02_proc.jpg)
+![](https://article.biliimg.com/bfs/article/4f9e5b31bc73a5d4bb3c901df06f12e92178d300.png)
 
 4. **开启开发者模式**。
 
-   ![](https://gitee.com/dywangk/img/raw/master/images/%E6%89%93%E5%BC%80%E5%BC%80%E5%8F%91%E8%80%85%E6%A8%A1%E5%BC%8F03.png)
+   ![](https://article.biliimg.com/bfs/article/674ad047462221ef3e6902c5591ea3f7b9e9ea14.png)
 
 5. **安装成功标志**。
 
-   ![](https://gitee.com/dywangk/img/raw/master/images/%E5%AE%89%E8%A3%85%E6%88%90%E5%8A%9F%E5%9C%A8%E6%89%A9%E5%B1%95%E4%B8%AD%E6%98%BE%E7%A4%BA05.png)
+   ![](https://article.biliimg.com/bfs/article/366b0795ea2c3a46fca0ebc1bfdd93c968d98add.png)
 
 # 【油猴插件】：管理脚本
 
@@ -91,7 +97,7 @@ iGuge谷歌访问助手，是我目前为止用过最稳定的一款插件，作
 
 1. 选择添加新脚本
 
-![](https://gitee.com/dywangk/img/raw/master/images/Google_Chrome_%E5%90%AF%E7%94%A8%E6%B2%B9%E4%BE%AF%E5%8A%A0%E9%80%9Fgithub_proc.jpg)
+![](https://article.biliimg.com/bfs/article/ba49003daf569831c04def2af686492dc8057276.png)
 
 ## 02 新增js脚本：
 
@@ -99,13 +105,13 @@ iGuge谷歌访问助手，是我目前为止用过最稳定的一款插件，作
 2. 在新建用户脚本编辑栏中加入需要设置的脚本代码，保存脚本。
 3. 进入后台管理启用脚本，选择已安装脚本点击已启用下面的按钮。
 
-![](https://gitee.com/dywangk/img/raw/master/images/油侯新增脚本_proc.jpg)
+![](https://article.biliimg.com/bfs/article/ca6661cc4da3bbb8994a6c7f6a65dd25057cad2a.png)
 
 ## 03 在浏览器中启用新增的js脚本：
 
 1. 启用脚本，点击已启用下的绿色按钮。
 
-![](https://gitee.com/dywangk/img/raw/master/images/启用脚本_proc.jpg)
+![](https://article.biliimg.com/bfs/article/e4afadef7a3811c996b98f3edd2c2732c8921dcc.png)
 
 # 向阳而生
 
