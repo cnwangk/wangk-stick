@@ -126,6 +126,3 @@
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/b9a69d18e92d4ef4b9325e623478b6bc.png?x-oss-process=,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6b6Z6IW-5LiH6YeMc2t5,size_20,color_FFFFFF,t_70,g_se,x_16#)
 
 **下载链接**：「markdown_tools」[https://www.aliyundrive.com/s/1755TgH4CEY](https://www.aliyundrive.com/s/1755TgH4CEY)
-
-
-<H3 align=center><a href="https://blog.csdn.net/Tolove_dream">by 龙腾万里sky 原创不易，白嫖有瘾</a></H3>

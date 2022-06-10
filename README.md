@@ -1,11 +1,12 @@
 # 龙腾万里sky
 
-**莫问收获，但问耕耘**，持续更新优化中，未完待续...
+**莫问收获，但问耕耘**，持续更新优化中...
 
-目录结构：**已经存放markdown格式的文章全部做了超链接**。
+**已经存放markdown格式的文章全部做了超链接**。
 
 
 - [md文件目录](https://github.com/cnwangk/wangk-stick/tree/master/md)
+  
   - [linux](https://github.com/cnwangk/wangk-stick/tree/master/md/linux)：个人的一些Linux相关工作经验总结。
     - Linux防火墙管理firewalld与iptables
     - Linux服务器配置静态IP
@@ -22,8 +23,6 @@
   - [markdown_tools](https://github.com/cnwangk/wangk-stick/tree/master/md/tools/markdown_tools)：markdown工具使用，搭建免费图床。
   - [vsftpd](https://github.com/cnwangk/wangk-stick/tree/master/md/linux/vsftpd)：Linux下vsftp搭建教程。
   - [zabbix](https://github.com/cnwangk/wangk-stick/tree/master/md/zabbix)：使用MySQL搭建分布式监控系统。
-  - Kafka：准备中。。。
-  - RocketMQ：准备中。。。
   
   
 
