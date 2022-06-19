@@ -1,4 +1,4 @@
-﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。MySQL官方示例库与文档地址已经补充。
+﻿﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。MySQL官方示例库与文档地址已经补充。
 
 如果对你有帮助，我很荣幸。如果有误导你的地方，我表示抱歉。所有总结仅供参考。
 
@@ -305,10 +305,13 @@ $> mkdir mysql-files  #创建mysql-files目录
 $> chown mysql:mysql mysql-files #赋予mysql用户mysql-files目录权限
 $> chmod 750 mysql-files  #赋予mysql-files权限750
 $> bin/mysqld --initialize --user=mysql #初始化并设置用户为mysql，生成随机密码会打印在字符界面（使用 --initialize-insecure则设置空密码）
+#--defaults-file=/usr/local/mysql/my.cnf 初始化指定my.cnf路径
+$> bin/mysqld --defaults-file=/usr/local/mysql/my.cnf  --initialize-insecure --user=mysql 
+--basedir=/usr/local/mysql/ --datadir=/usr/local/mysql/data
 $> bin/mysql_ssl_rsa_setup   #启动ssl_rsa验证
 $> bin/mysqld_safe --user=mysql & #启动服务
 # Next command is optional  #复制mysql.server脚本服务到Linux环境init.d目录，便于管理
-$> cp support-files/mysql.server /etc/init.d/mysql.server
+$> cp support-files/mysql.server /etc/init.d/
 ```
 
 以龙蜥系统8.4GA进行简单说明：
