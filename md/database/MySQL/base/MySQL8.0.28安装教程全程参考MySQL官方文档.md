@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。MySQL官方示例库与文档地址已经补充。
+﻿﻿﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。MySQL官方示例库与文档地址已经补充。
 
 如果对你有帮助，我很荣幸。如果有误导你的地方，我表示抱歉。所有总结仅供参考。
 
@@ -332,6 +332,15 @@ vim mysql_start.sh
 /usr/local/mysql/bin/mysqld_safe --user=mysql &
 ```
 
+运行脚本：
+
+```bash
+chmod 755 mysql_start.sh
+./mysql_start.sh
+```
+
+
+
 3.登录到mysql
 
 ```sql
@@ -411,6 +420,8 @@ $ yum remove mariadb-libs
 
 **2.2.3、正式安装server**
 
+这一步只作为说明，如果上面安装完成，无需重复安装mysql-community-server-8.0.28-1.el7.x86_64.rpm服务。
+
 ```bash
 $ rpm -ivh mysql-community-server-8.0.28-1.el7.x86_64.rpm
 ```
@@ -436,7 +447,7 @@ $ mysql passwd
 #mysql数据库存储目录的权限
 $ chown -R mysql:mysql /var/lib/mysql
 #日志的权限
-$ chown mysql:mysqld /var/log/mysqld.log
+$ chown mysql:mysql /var/log/mysqld.log
 ```
 
 tips：你也可以将mysql用户加入到/etc/sudoers配置文件中，限制mysql用户使用的权限。
