@@ -1,4 +1,5 @@
-﻿﻿﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。新增Windows10下MSI文件安装MySQL8.0.28，并且多实例共存解决方法。MySQL官方示例库与文档地址已经补充。
+﻿
+﻿﻿﻿﻿MySQL8.0.28详细安装教程。提供了Windows10下安装MariaDB与MySQL8.0同时共存的方法，以及Linux发行版Redhat7系列安装MySQL8.0详细教程。Windows10下使用MSI文件安装MySQL8.0.28注意事项，并且多实例共存解决方法。MySQL官方示例库与文档地址已经补充。
 
 如果对你有帮助，我很荣幸。如果有误导你的地方，我表示抱歉。所有总结仅供参考。
 
@@ -6,9 +7,68 @@
 
 > [https://github.com/cnwangk/wangk-stick](https://github.com/cnwangk/wangk-stick)
 
-[TOC]
+
+
+[toc]
+
+
 
 # 前言
+
+当你看到这篇教程时，MySQL目前最新GA（稳定）版本更新到了MySQL8.0.29，修复了不少bug，其中就有关于创建表默认是utf8mb3。
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/73ba0bb4f515481297e88467614c1c2d.png#)
+
+
+
+**MySQL8.0.28查看创建表语句**：看到默认CHARSET=utf8mb3。当时写这篇博客时，我以为是显示问题，没怎么在意，后来看了官网才知到。
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/9f900ec2e68b4971b259b09b1fd05088.png)
+
+
+
+通过下面这个链接可以看到MySQL8.0.29做了哪些改进：
+[https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-29.html#mysqld-8-0-29-bug](https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-29.html#mysqld-8-0-29-bug)
+
+**MySQL8.0.28**：
+
+
+```bash
+mysql> show create table t\G
+*************************** 1. row ***************************
+       Table: t
+Create Table: CREATE TABLE `t` (
+  `i` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3
+1 row in set (0.00 sec)
+```
+
+
+
+**使用MySQL8.0.29对比**：
+
+```bash
+mysql> create database test;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use test;
+Database changed
+mysql> create table t(id int primary key,names varchar(64));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show create table t\G
+*************************** 1. row ***************************
+       Table: t
+Create Table: CREATE TABLE `t` (
+  `id` int NOT NULL,
+  `names` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+1 row in set (0.00 sec)
+```
+
+
+
 
 为了MySQL8.0.28安装教程我竟然在MySQL官方文档逛了一天，至此献给想入门MySQL8.0的初学者。以目前最新版本的MySQL8.0.28为示例进行安装与初步使用的详细讲解，面向初学者的详细教程。无论是Windows还是Linux上安装，咱都会。**这也许是迄今为止全网最最最详细的MySQL8.0.28的安装与使用教程**。
 
@@ -18,17 +78,19 @@
 
 从下载到安装，再到忘记密码解决方案。一步步使用命令行窗口学会基本操作，然后使用客户端远程连接工具。最后配合时下比较火热的Java语言进行演示如何使用JDBC连接最新的MySQL8.0数据库，以及执行查询返回结果。
 
-# 正文
 
-咱也不多哔哔，直接上干货，要的就是实用性和性价比！
+# MySQL8.0.28安装教程全程参考MySQL官方文档
+
+咱也不多哔哔，直接上干货，要的就是实用性！
 
 ## 一、MySQL8.0.28下载
 
 你可以下载msi文件一键安装，也可以下载解压版zip文件（Archive）进行命令行初始化安装，也是个人推荐的方式。
 
-MySQL官网下载地址
+**MySQL官网下载地址**
 
 [https://dev.mysql.com/downloads/mysql/](https://dev.mysql.com/downloads/mysql/)
+
 
 ### 1、Windows版本下载
 
@@ -40,13 +102,13 @@ MySQL官网下载地址
 
 根据自己需要的Linux发行版版本适配的MySQL进行选择。安装方式多种多样，二进制包（MySQL-8.0.28-xx.tar.gz，打包成tar包然后压缩成gz格式）、rpm包以及源码包（source）安装。选择你擅长一种方式即可，没必要纠结，但也要根据实际场景进行下载安装。
 
-比如，我个人选择的是自己比较熟悉的Redhat7系列进行下载。同样有bundle版本，包含了一些插件和依赖在里面，便于使用rpm包安装。安装单个的server服务，需要安装其它的依赖包比较繁琐。对于初学者，**建议直接下载RPM bundle版本**。我偏不，就要折腾。那也行，请接着往下看，一样提供了详细安装步骤。
+比如，我个人选择的是自己比较熟悉的Redhat7（Centos7）系列进行下载。同样有bundle版本，包含了一些插件和依赖在里面，便于使用rpm包安装。安装单个的server服务，需要安装其它的依赖包比较繁琐。对于初学者，**建议直接使用官方提供的yum源或者其它源直接进行安装**。我偏不，就要折腾。那也行，请接着往下看，一样提供了详细安装步骤。
 
 ![](https://img-blog.csdnimg.cn/img_convert/bece1b1fe0b0d6895786b5f4cee4330a.png)
 
 ### 3、注意事项
 
-一般人可以能没仔细看，官方会提示登录，加了button按钮字体非常显眼，而下面的的我需要立即下载则字体很小。所以注意了，选择下面的No thanks，我需要立即下载。选择的是社区版本，免费提供下载。
+一般情况可能没仔细看，官方会提示登录，加了button按钮字体非常显眼，而下面的的我需要立即下载则字体很小。**所以注意了，选择下面的No thanks，我需要立即下载**。选择的是社区版本，免费提供下载。
 
 ![](https://img-blog.csdnimg.cn/img_convert/5d94094f47a22cfeb07461833128cc84.png)
 
@@ -82,13 +144,20 @@ cls
 mysql -uroot -p -P 3366
 ```
 
-## 二、MySQL8.0安装
 
-MySQL在Windows平台提供了两种安装形式：
+## 二、MySQL8.0安装
+**关于MySQL8.0在各大平台安装教程**，MySQL官方文档有很详细的使用说明可进行参考，**第二章节讲解安装和升级MySQL**。
+
+> Chapter 2 Installing and Upgrading MySQL
+
+> Installing MySQL on Microsoft Windows
+
+MySQL在Windows平台提供了多种安装形式：
 
 1. msi文件：直接双击进行安装，有可视化界面，安装较为容易，但不够灵活。
 2. 归档包（archive）：以zip格式进行压缩，类似于Linux中的二进制包。比较灵活，只需几个命令即可安装服务和实例化。
-3. docker形式安装：其实是在容器中安装。
+3. 源码包（source package）：最灵活，可根据需求编译安装功能，难易度最高。
+4. docker形式安装：其实是在容器中安装。
 
 **初学者尝鲜，建议在Windows下安装**。接下来介绍的是归档包（archive）安装与使用。
 
@@ -280,6 +349,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '新密码'
 之所以在Windows下介绍的如此详细，是因为我们平时的工作环境更多的是在Windows下进行的。就算使用Linux环境一般也是使用虚拟机配合Linux发行版，再就是云服务器了。MySQL的一些命令都熟悉了，Linux下安装还能难倒你吗？直接翻一翻官方文档即可。
 
 ### 2、Linux下安装MySQL8.0
+> Installing MySQL on Linux  rpm or Using Generic Binaries 
 
 Linux或者Unix安装MySQL有四种方式：
 
@@ -768,15 +838,16 @@ net start mysql
 
 注意：在Windows下使用cmd命令窗口以管理员身份运行登录，没有配置环境变量也没关系，切换到MySQL安装的bin目录下执行命令。
 
-```sql
+```bash
 -- 第一步执行d:，切换到D盘
 d:
 -- 第二步执行cd命令，切换到个人安装mysql的bin目录下
 cd D:\work\mysql-8.0.28-winx64\bin
+
 -- 执行登录命令，并指定端口
 mysql -uroot -p -P 3307
+
 -- 查询数据库版本
-```sql
 mysql> select version();
 +-----------+
 | version() |
@@ -785,9 +856,12 @@ mysql> select version();
 +-----------+
 1 row in set (0.00 sec)
 ```
-```
+
+
 
 ![](https://img-blog.csdnimg.cn/img_convert/842e5e9623b5a5156bdbaf67b9b1f6aa.png)
+
+
 
 总结一下：
 
@@ -795,6 +869,8 @@ mysql> select version();
 - 第二步执行cd命令，切换到个人安装mysql的bin目录下；
 - 第三步执行登录命令，并指定端口登录到mysql；
 - 最后进行简单的交互，并查询数据库版本。
+
+
 
 **1.2、初步使用命令行模式进行交互**
 
@@ -1319,7 +1395,8 @@ public class TestConnMySQL8 {
 
 # 总结
 
-以上就是本次MySQL8.0.28安装与使用的全部内容，希望能对你的工作与学习有所帮助。感觉写的好，就拿出你的一键三连。在公众号上更新的可能要快一点，目前还在完善中。**能看到这里的，都是帅哥靓妹**。如果感觉总结的不到位，也希望能留下您宝贵的意见，我会在文章中进行调整优化。
+以上就是本次MySQL8.0.28安装与使用的全部内容，希望能对你的工作与学习有所帮助。在公众号：dywangk上更新的可能要快一点，目前还在完善中。**能看到这里的，都是帅哥靓妹**。如果感觉总结的不到位，也希望能留下您宝贵的意见，我会在文章中进行调整优化。
 ![](https://img-blog.csdnimg.cn/img_convert/9274af9e14216005237b8c9698286908.png)
 
 原创不易，转载也请标明出处和作者，尊重原创。不定期上传到github。**MySQL系列文章**：《**MySQL开发篇，存储引擎的选择真的很重要吗？**》已经上传至github仓库wangk-stick。
+
