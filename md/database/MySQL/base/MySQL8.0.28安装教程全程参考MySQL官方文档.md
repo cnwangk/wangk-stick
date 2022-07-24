@@ -7,31 +7,23 @@
 
 > [https://github.com/cnwangk/wangk-stick](https://github.com/cnwangk/wangk-stick)
 
-
+**说明**：个人原来CSDN账号已经注销，所有内容清空了。现在使用这个账号发一些博文，同时进行微调。
 
 [toc]
 
-
-
 # 前言
 
-当你看到这篇教程时，MySQL目前最新GA（稳定）版本更新到了MySQL8.0.29，修复了不少bug，其中就有关于创建表默认是utf8mb3。
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/73ba0bb4f515481297e88467614c1c2d.png#)
-
-
-
 **MySQL8.0.28查看创建表语句**：看到默认CHARSET=utf8mb3。当时写这篇博客时，我以为是显示问题，没怎么在意，后来看了官网才知到。
-
-![在这里插入图片描述](https://img-blog.csdnimg.cn/9f900ec2e68b4971b259b09b1fd05088.png)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/0affba846cb244d08733d15c8870556e.png#pic_center)
 
 
 
 通过下面这个链接可以看到MySQL8.0.29做了哪些改进：
 [https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-29.html#mysqld-8-0-29-bug](https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-29.html#mysqld-8-0-29-bug)
 
-**MySQL8.0.28**：
 
+
+**MySQL8.0.28**：
 
 ```bash
 mysql> show create table t\G
@@ -65,18 +57,27 @@ Create Table: CREATE TABLE `t` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 1 row in set (0.00 sec)
+
 ```
 
+
+
+当你看到这篇教程时，MySQL目前最新GA（稳定）版本更新到了MySQL8.0.29，修复了不少bug，其中就有关于创建表默认是utf8mb3。
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/fd8783333363481c8f2d4d27a498886f.png#pic_center)
 
 
 
 为了MySQL8.0.28安装教程我竟然在MySQL官方文档逛了一天，至此献给想入门MySQL8.0的初学者。以目前最新版本的MySQL8.0.28为示例进行安装与初步使用的详细讲解，面向初学者的详细教程。无论是Windows还是Linux上安装，咱都会。**这也许是迄今为止全网最最最详细的MySQL8.0.28的安装与使用教程**。
 
-温故而知新，可以为师矣。**建议初学者多在命令行窗口下进行练习**，熟能生巧。达到一定的熟练程度，再借助客户端工具提高我们的工作效率。最终目的是啥？活下去呗，提高捞金能力。当然开个玩笑，回到正题，接着往下看。
 
-![](https://img-blog.csdnimg.cn/img_convert/7b6a3c1312093fba007e4f7fb6bf909d.png)
+
+温故而知新，可以为师矣。**建议初学者多在命令行窗口下进行练习**，熟能生巧。达到一定的熟练程度，再借助客户端工具提高我们的工作效率。最终目的是啥？活下去呗，提高捞金能力。当然开个玩笑，回到正题，接着往下看。
+![在这里插入图片描述](https://img-blog.csdnimg.cn/166f81cb3e1c49d78670ad1280aa48cb.jpeg#pic_center)
 
 从下载到安装，再到忘记密码解决方案。一步步使用命令行窗口学会基本操作，然后使用客户端远程连接工具。最后配合时下比较火热的Java语言进行演示如何使用JDBC连接最新的MySQL8.0数据库，以及执行查询返回结果。
+
+
 
 
 # MySQL8.0.28安装教程全程参考MySQL官方文档
@@ -843,10 +844,8 @@ net start mysql
 d:
 -- 第二步执行cd命令，切换到个人安装mysql的bin目录下
 cd D:\work\mysql-8.0.28-winx64\bin
-
 -- 执行登录命令，并指定端口
 mysql -uroot -p -P 3307
-
 -- 查询数据库版本
 mysql> select version();
 +-----------+
@@ -856,11 +855,7 @@ mysql> select version();
 +-----------+
 1 row in set (0.00 sec)
 ```
-
-
-
-![](https://img-blog.csdnimg.cn/img_convert/842e5e9623b5a5156bdbaf67b9b1f6aa.png)
-
+![在这里插入图片描述](https://img-blog.csdnimg.cn/e6959726881e467f821630b8a81364b0.jpeg#pic_center)
 
 
 总结一下：
@@ -870,11 +865,9 @@ mysql> select version();
 - 第三步执行登录命令，并指定端口登录到mysql；
 - 最后进行简单的交互，并查询数据库版本。
 
-
-
 **1.2、初步使用命令行模式进行交互**
+![在这里插入图片描述](https://img-blog.csdnimg.cn/9c58020d479a438da565d0ca056a9784.jpeg#pic_center)
 
-![](https://img-blog.csdnimg.cn/img_convert/01d10238ecaa7e9ebdd0e879e67b9cc6.png)
 
 ### 2、权限设置
 
